@@ -1,0 +1,20 @@
+<?xml version="1.0"?>
+<package>
+  <metadata>
+    <id>KTools.VersionIncrement</id>
+    <version>1.1.0</version>
+    <title>Version Increment</title>
+    <authors>Keiho Sakapon</authors>
+    <owners>Keiho Sakapon</owners>
+    <licenseUrl>https://github.com/sakapon/ZIP-Release/blob/master/LICENSE</licenseUrl>
+    <projectUrl>https://github.com/sakapon/ZIP-Release</projectUrl>
+    <requireLicenseAcceptance>false</requireLicenseAcceptance>
+    <description>Increments the assembly version on AssemblyInfo.</description>
+    <releaseNotes></releaseNotes>
+    <copyright>© 2018 Keiho Sakapon</copyright>
+    <tags>Version Increment Assembly AssemblyInfo</tags>
+  </metadata>
+  <files>
+    <file src="VersionIncrement.ps1" target="content" />
+  </files>
+</package>
