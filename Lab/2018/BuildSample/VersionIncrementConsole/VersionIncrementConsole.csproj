@@ -6,8 +6,8 @@
     <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
     <ProjectGuid>{D0AB638E-A99D-4BFE-A47D-50BFC4E019E5}</ProjectGuid>
     <OutputType>Exe</OutputType>
-    <RootNamespace>IncrementVersionConsole</RootNamespace>
-    <AssemblyName>IncrementVersionConsole</AssemblyName>
+    <RootNamespace>VersionIncrementConsole</RootNamespace>
+    <AssemblyName>VersionIncrementConsole</AssemblyName>
     <TargetFrameworkVersion>v4.5</TargetFrameworkVersion>
     <FileAlignment>512</FileAlignment>
   </PropertyGroup>
