@@ -10,7 +10,7 @@ namespace UnitTest.VersionIncrement
         [TestMethod]
         public void IncrementLine_1()
         {
-            var Test = CreateTestMethod<string, string>(Program.IncrementLine);
+            var Test = CreateAssertion<string, string>(Program.IncrementLine);
 
             Test(
                 "[assembly: AssemblyVersion(\"1.0.0.0\")]",
@@ -24,6 +24,9 @@ namespace UnitTest.VersionIncrement
             Test(
                 "// [assembly: AssemblyVersion(\"1.0.0.0\")]",
                 "// [assembly: AssemblyVersion(\"1.0.0.0\")]");
+            Test(
+                " // [assembly: AssemblyVersion(\"1.0.0.0\")]",
+                " // [assembly: AssemblyVersion(\"1.0.0.0\")]");
             Test(
                 "[assembly: AssemblyCompany(\"Xyz Company\")]",
                 "[assembly: AssemblyCompany(\"Xyz Company\")]");
