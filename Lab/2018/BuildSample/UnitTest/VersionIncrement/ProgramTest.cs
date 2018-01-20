@@ -8,6 +8,13 @@ namespace UnitTest.VersionIncrement
     public class ProgramTest
     {
         [TestMethod]
+        public void IncrementForFile_1()
+        {
+            Program.IncrementForFile(@"..\..\Properties\AssemblyInfo.cs");
+            Assert.Inconclusive("See the file.");
+        }
+
+        [TestMethod]
         public void IncrementForLine_1()
         {
             var Test = CreateAssertion<string, string>(Program.IncrementForLine);
