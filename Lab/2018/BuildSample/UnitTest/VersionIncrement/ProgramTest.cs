@@ -8,9 +8,9 @@ namespace UnitTest.VersionIncrement
     public class ProgramTest
     {
         [TestMethod]
-        public void IncrementLine_1()
+        public void IncrementForLine_1()
         {
-            var Test = CreateAssertion<string, string>(Program.IncrementLine);
+            var Test = CreateAssertion<string, string>(Program.IncrementForLine);
 
             Test(
                 "[assembly: AssemblyVersion(\"1.0.0.0\")]",

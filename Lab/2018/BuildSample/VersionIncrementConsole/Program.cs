@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Collections.Generic;
 using System.IO;
 using System.Linq;
 using System.Text;
@@ -8,24 +9,30 @@ public static class Program
 {
     public static int Main(string[] args)
     {
-        if (args.Length < 1) return 100;
+        var dirPath = args.Length > 0 ? args[0] : ".";
 
-        IncrementVersion(args[0]);
+        foreach (var filePath in GetAssemblyInfoPaths(dirPath))
+            IncrementForFile(filePath);
+
         return 0;
     }
 
-    public static void IncrementVersion(string projDirPath)
+    static IEnumerable<string> GetAssemblyInfoPaths(string dirPath)
     {
-        var assemblyInfoPath = Directory.EnumerateFiles(projDirPath, "AssemblyInfo.cs", SearchOption.AllDirectories).First();
-        var contents = File.ReadLines(assemblyInfoPath, Encoding.UTF8)
-            .Select(IncrementLine)
+        return Directory.EnumerateFiles(dirPath, "AssemblyInfo.cs", SearchOption.AllDirectories);
+    }
+
+    internal static void IncrementForFile(string filePath)
+    {
+        var contents = File.ReadLines(filePath, Encoding.UTF8)
+            .Select(IncrementForLine)
             .ToArray();
-        File.WriteAllLines(assemblyInfoPath, contents, Encoding.UTF8);
+        File.WriteAllLines(filePath, contents, Encoding.UTF8);
     }
 
     static readonly Regex BuildNumberPattern = new Regex(@"(?<=Assembly(File)?Version\(""\d+\.\d+\.)\d+");
 
-    internal static string IncrementLine(string line)
+    internal static string IncrementForLine(string line)
     {
         if (line.StartsWith("//")) return line;
 
