@@ -30,11 +30,12 @@ public static class Program
         File.WriteAllLines(filePath, contents, Encoding.UTF8);
     }
 
+    static readonly Regex CommentPattern = new Regex(@"^\s*//");
     static readonly Regex BuildNumberPattern = new Regex(@"(?<=Assembly(File)?Version\(""\d+\.\d+\.)\d+");
 
     internal static string IncrementForLine(string line)
     {
-        if (line.StartsWith("//")) return line;
+        if (CommentPattern.IsMatch(line)) return line;
 
         return BuildNumberPattern.Replace(line, m => IncrementNumber(m.Value));
     }
