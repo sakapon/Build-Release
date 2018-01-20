@@ -1,5 +1,6 @@
 ﻿using System;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
+using static UnitTest.TestHelper;
 
 namespace UnitTest.VersionIncrement
 {
@@ -9,22 +10,21 @@ namespace UnitTest.VersionIncrement
         [TestMethod]
         public void IncrementLine_1()
         {
-            void IncrementLine_Test(string line, string expected)
-            {
-                var actual = Program.IncrementLine(line);
-                Assert.AreEqual(expected, actual);
-            }
+            var Test = CreateTestMethod<string, string>(Program.IncrementLine);
 
-            IncrementLine_Test(
+            Test(
                 "[assembly: AssemblyVersion(\"1.0.0.0\")]",
                 "[assembly: AssemblyVersion(\"1.0.1.0\")]");
-            IncrementLine_Test(
+            Test(
                 "[assembly: AssemblyFileVersion(\"1.23.456\")]",
                 "[assembly: AssemblyFileVersion(\"1.23.457\")]");
-            IncrementLine_Test(
-                "// [assembly: AssemblyVersion(\"1.0.*\")]",
-                "// [assembly: AssemblyVersion(\"1.0.*\")]");
-            IncrementLine_Test(
+            Test(
+                "[assembly: AssemblyFileVersion(\"1.23.456-beta\")]",
+                "[assembly: AssemblyFileVersion(\"1.23.457-beta\")]");
+            Test(
+                "// [assembly: AssemblyVersion(\"1.0.0.0\")]",
+                "// [assembly: AssemblyVersion(\"1.0.0.0\")]");
+            Test(
                 "[assembly: AssemblyCompany(\"Xyz Company\")]",
                 "[assembly: AssemblyCompany(\"Xyz Company\")]");
         }
