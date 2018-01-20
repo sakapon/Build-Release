@@ -23,21 +23,13 @@ public static class Program
         File.WriteAllLines(assemblyInfoPath, contents, Encoding.UTF8);
     }
 
+    static readonly Regex BuildNumberPattern = new Regex(@"(?<=Assembly(File)?Version\(""\d+\.\d+\.)\d+");
+
     internal static string IncrementLine(string line)
     {
         if (line.StartsWith("//")) return line;
 
-        var match = Regex.Match(line, @"Assembly(File)?Version\(""([0-9\.]+)""\)");
-        if (!match.Success) return line;
-
-        var oldVersion = match.Groups[2].Value;
-        var newVersion = IncrementBuildNumber(oldVersion);
-        return line.Replace(oldVersion, newVersion);
-    }
-
-    static string IncrementBuildNumber(string version)
-    {
-        return Regex.Replace(version, @"^(\d+\.\d+\.)(\d+)((\.\d+)?)$", m => m.Groups[1].Value + IncrementNumber(m.Groups[2].Value) + m.Groups[3].Value);
+        return BuildNumberPattern.Replace(line, m => IncrementNumber(m.Value));
     }
 
     static string IncrementNumber(string i)
