@@ -23,7 +23,7 @@ public static class Program
         File.WriteAllLines(assemblyInfoPath, contents, Encoding.UTF8);
     }
 
-    static string IncrementLine(string line)
+    internal static string IncrementLine(string line)
     {
         if (line.StartsWith("//")) return line;
 
