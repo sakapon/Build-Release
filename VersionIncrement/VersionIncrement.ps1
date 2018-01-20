@@ -10,6 +10,7 @@ public static class Program
 {
     public static int Main(string[] args)
     {
+        // args[0]: The target directory path (optional).
         var dirPath = args.Length > 0 ? args[0] : ".";
 
         foreach (var filePath in GetAssemblyInfoPaths(dirPath))
@@ -31,12 +32,12 @@ public static class Program
         File.WriteAllLines(filePath, contents, Encoding.UTF8);
     }
 
-    static readonly Regex BuildNumberPattern = new Regex(@"(?<=Assembly(File)?Version\(""\d+\.\d+\.)\d+");
+    // (?<!) Zero-width negative lookbehind assertion.
+    // (?<=) Zero-width positive lookbehind assertion.
+    static readonly Regex BuildNumberPattern = new Regex(@"(?<!^\s*//.*)(?<=Assembly(File)?Version\(""\d+\.\d+\.)\d+");
 
     internal static string IncrementForLine(string line)
     {
-        if (line.StartsWith("//")) return line;
-
         return BuildNumberPattern.Replace(line, m => IncrementNumber(m.Value));
     }
 
