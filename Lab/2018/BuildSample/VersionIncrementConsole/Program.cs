@@ -9,6 +9,7 @@ public static class Program
 {
     public static int Main(string[] args)
     {
+        // args[0]: The target directory path (optional).
         var dirPath = args.Length > 0 ? args[0] : ".";
 
         foreach (var filePath in GetAssemblyInfoPaths(dirPath))
