@@ -14,18 +14,23 @@ public static class ZipHelper
 
         var sourceDirPath = Path.GetDirectoryName(sourceAssemblyFilePath);
         var targetZipFileName = string.Format("{0}-{1}.zip", assemblyName, assemblyFileVersion.Version);
-        var targetZipFilePath = Path.Combine(targetDirPath, targetZipFileName);
 
-        Directory.CreateDirectory(targetDirPath);
-        File.Delete(targetZipFilePath);
-        ZipFile.CreateFromDirectory(sourceDirPath, targetZipFilePath);
+        CreateZipFile(sourceDirPath, targetDirPath, targetZipFileName);
     }
 
-    public static void CreateZip(string sourceDirPath, string targetZipFilePath)
+    public static void CreateZipFile(string inputDirPath, string outputZipFilePath)
     {
-        var targetDirPath = Path.GetDirectoryName(targetZipFilePath);
-        Directory.CreateDirectory(targetDirPath);
-        File.Delete(targetZipFilePath);
-        ZipFile.CreateFromDirectory(sourceDirPath, targetZipFilePath);
+        var outputDirPath = Path.GetDirectoryName(outputZipFilePath);
+        Directory.CreateDirectory(outputDirPath);
+        File.Delete(outputZipFilePath);
+        ZipFile.CreateFromDirectory(inputDirPath, outputZipFilePath);
+    }
+
+    public static void CreateZipFile(string inputDirPath, string outputDirPath, string outputZipFileName)
+    {
+        var outputZipFilePath = Path.Combine(outputDirPath, outputZipFileName);
+        Directory.CreateDirectory(outputDirPath);
+        File.Delete(outputZipFilePath);
+        ZipFile.CreateFromDirectory(inputDirPath, outputZipFilePath);
     }
 }
