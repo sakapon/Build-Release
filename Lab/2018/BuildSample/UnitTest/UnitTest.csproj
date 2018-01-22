@@ -51,6 +51,7 @@
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="TestHelper.cs" />
     <Compile Include="VersionIncrement\ProgramTest.cs" />
+    <Compile Include="ZipRelease\ZipHelperTest.cs" />
   </ItemGroup>
   <ItemGroup>
     <None Include="packages.config" />
