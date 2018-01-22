@@ -10,6 +10,7 @@ namespace ZipReleaseConsole
     {
         static void Main(string[] args)
         {
+            ZipHelper.CreateZipFileForAssembly(@"..\..\");
         }
     }
 }

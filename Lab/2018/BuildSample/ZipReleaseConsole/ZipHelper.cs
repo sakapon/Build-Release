@@ -1,20 +1,42 @@
 ﻿using System;
 using System.IO;
 using System.IO.Compression;
+using System.Linq;
 using System.Reflection;
+using System.Xml;
 
 public static class ZipHelper
 {
     public static void CreateZipFileForAssembly(string projDirPath = ".", string outputDirPath = "zip")
     {
-        var assemblyName = "*";
-        var assemblyFilePath = "*.exe";
-        var binDirPath = @"bin\Release";
+        var projFilePath = GetProjFilePath(projDirPath);
+
+        var projXml = new XmlDocument();
+        projXml.Load(projFilePath);
+        var nsm = new XmlNamespaceManager(projXml.NameTable);
+        nsm.AddNamespace("p", "http://schemas.microsoft.com/developer/msbuild/2003");
+
+        var assemblyName = projXml.DocumentElement.SelectSingleNode("./p:PropertyGroup/p:AssemblyName", nsm).InnerText;
+        var projReleasePath = projXml.DocumentElement.SelectNodes("./p:PropertyGroup/p:OutputPath", nsm)
+            .OfType<XmlElement>()
+            .Single(xe => xe.ParentNode.Attributes["Condition"].Value.Contains("Release"))
+            .InnerText;
+
+        var assemblyFilePath = assemblyName + ".exe";
+        var binDirPath = Path.Combine(projDirPath, projReleasePath);
 
         var version = GetAssemblyFileVersion(assemblyFilePath);
         var outputZipFileName = string.Format("{0}-{1}.zip", assemblyName, version);
 
         CreateZipFile(binDirPath, outputDirPath, outputZipFileName);
+    }
+
+    static string GetProjFilePath(string dirPath)
+    {
+        return Directory.EnumerateFiles(dirPath, "*.csproj", SearchOption.AllDirectories)
+            .Concat(Directory.EnumerateFiles(dirPath, "*.vbproj", SearchOption.AllDirectories))
+            .Concat(Directory.EnumerateFiles(dirPath, "*.fsproj", SearchOption.AllDirectories))
+            .Single();
     }
 
     internal static string GetAssemblyFileVersion(string assemblyFilePath)
