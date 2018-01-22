@@ -17,13 +17,15 @@ public static class ZipHelper
         nsm.AddNamespace("p", "http://schemas.microsoft.com/developer/msbuild/2003");
 
         var assemblyName = projXml.DocumentElement.SelectSingleNode("./p:PropertyGroup/p:AssemblyName", nsm).InnerText;
+        var outputType = projXml.DocumentElement.SelectSingleNode("./p:PropertyGroup/p:OutputType", nsm).InnerText;
         var projReleasePath = projXml.DocumentElement.SelectNodes("./p:PropertyGroup/p:OutputPath", nsm)
             .OfType<XmlElement>()
             .Single(xe => xe.ParentNode.Attributes["Condition"].Value.Contains("Release"))
             .InnerText;
 
-        var assemblyFilePath = assemblyName + ".exe";
         var binDirPath = Path.Combine(projDirPath, projReleasePath);
+        var assemblyFileName = assemblyName + (outputType == "Exe" ? ".exe" : ".dll");
+        var assemblyFilePath = Path.Combine(binDirPath, assemblyFileName);
 
         var version = GetAssemblyFileVersion(assemblyFilePath);
         var outputZipFileName = string.Format("{0}-{1}.zip", assemblyName, version);
