@@ -13,4 +13,4 @@ msbuild /p:Configuration=Release /t:Clean
 msbuild /p:Configuration=Release /t:Rebuild
 
 Add-Type -TypeDefinition $source -Language CSharp -ReferencedAssemblies $references
-[ZipHelper]::CreateZipForAssembly("bin\Release\ZipReleaseConsole.exe", "zip")
+[ZipHelper]::CreateZipFileForAssembly()

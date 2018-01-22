@@ -5,17 +5,23 @@ using System.Reflection;
 
 public static class ZipHelper
 {
-    public static void CreateZipForAssembly(string sourceAssemblyFilePath, string targetDirPath)
+    public static void CreateZipFileForAssembly(string projDirPath = ".", string outputDirPath = "zip")
     {
-        var assemblyName = Path.GetFileNameWithoutExtension(sourceAssemblyFilePath);
-        var assembly = Assembly.LoadFrom(sourceAssemblyFilePath);
+        var assemblyName = "*";
+        var assemblyFilePath = "*.exe";
+        var binDirPath = @"bin\Release";
+
+        var version = GetAssemblyFileVersion(assemblyFilePath);
+        var outputZipFileName = string.Format("{0}-{1}.zip", assemblyName, version);
+
+        CreateZipFile(binDirPath, outputDirPath, outputZipFileName);
+    }
+
+    static string GetAssemblyFileVersion(string assemblyFilePath)
+    {
+        var assembly = Assembly.LoadFrom(assemblyFilePath);
         var assemblyFileVersion = assembly.GetCustomAttribute<AssemblyFileVersionAttribute>();
-        if (assemblyFileVersion == null) return;
-
-        var sourceDirPath = Path.GetDirectoryName(sourceAssemblyFilePath);
-        var targetZipFileName = string.Format("{0}-{1}.zip", assemblyName, assemblyFileVersion.Version);
-
-        CreateZipFile(sourceDirPath, targetDirPath, targetZipFileName);
+        return assemblyFileVersion != null ? assemblyFileVersion.Version : null;
     }
 
     public static void CreateZipFile(string inputDirPath, string outputZipFilePath)
