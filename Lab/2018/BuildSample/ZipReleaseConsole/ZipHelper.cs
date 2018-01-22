@@ -2,7 +2,6 @@
 using System.IO;
 using System.IO.Compression;
 using System.Linq;
-using System.Reflection;
 using System.Xml;
 
 public static class ZipHelper
@@ -10,6 +9,7 @@ public static class ZipHelper
     public static void CreateZipFileForAssembly(string projDirPath = ".", string outputDirPath = "zip")
     {
         var projFilePath = GetProjFilePath(projDirPath);
+        var assemblyInfoFilePath = GetAssemblyInfoFilePath(projDirPath);
 
         var projXml = new XmlDocument();
         projXml.Load(projFilePath);
@@ -17,17 +17,13 @@ public static class ZipHelper
         nsm.AddNamespace("p", "http://schemas.microsoft.com/developer/msbuild/2003");
 
         var assemblyName = projXml.DocumentElement.SelectSingleNode("./p:PropertyGroup/p:AssemblyName", nsm).InnerText;
-        var outputType = projXml.DocumentElement.SelectSingleNode("./p:PropertyGroup/p:OutputType", nsm).InnerText;
         var projReleasePath = projXml.DocumentElement.SelectNodes("./p:PropertyGroup/p:OutputPath", nsm)
             .OfType<XmlElement>()
             .Single(xe => xe.ParentNode.Attributes["Condition"].Value.Contains("Release"))
             .InnerText;
 
         var binDirPath = Path.Combine(projDirPath, projReleasePath);
-        var assemblyFileName = assemblyName + (outputType.ToLowerInvariant().Contains("exe") ? ".exe" : ".dll");
-        var assemblyFilePath = Path.Combine(binDirPath, assemblyFileName);
-
-        var version = GetAssemblyFileVersion(assemblyFilePath);
+        var version = GetAssemblyFileVersion(assemblyInfoFilePath);
         var outputZipFileName = string.Format("{0}-{1}.zip", assemblyName, version);
 
         CreateZipFile(binDirPath, outputDirPath, outputZipFileName);
@@ -35,25 +31,17 @@ public static class ZipHelper
 
     static string GetProjFilePath(string dirPath)
     {
-        return Directory.EnumerateFiles(dirPath, "*.csproj", SearchOption.AllDirectories)
-            .Concat(Directory.EnumerateFiles(dirPath, "*.vbproj", SearchOption.AllDirectories))
-            .Concat(Directory.EnumerateFiles(dirPath, "*.fsproj", SearchOption.AllDirectories))
-            .Single();
+        return Directory.EnumerateFiles(dirPath, "*.csproj", SearchOption.AllDirectories).Single();
     }
 
-    internal static string GetAssemblyFileVersion(string assemblyFilePath)
+    static string GetAssemblyInfoFilePath(string dirPath)
     {
-        var assembly = Assembly.LoadFrom(assemblyFilePath);
-        var assemblyFileVersion = assembly.GetCustomAttribute<AssemblyFileVersionAttribute>();
-        return assemblyFileVersion != null ? assemblyFileVersion.Version : null;
+        return Directory.EnumerateFiles(dirPath, "AssemblyInfo.cs", SearchOption.AllDirectories).Single();
     }
 
-    public static void CreateZipFile(string inputDirPath, string outputZipFilePath)
+    internal static string GetAssemblyFileVersion(string assemblyInfoFilePath)
     {
-        var outputDirPath = Path.GetDirectoryName(outputZipFilePath);
-        Directory.CreateDirectory(outputDirPath);
-        File.Delete(outputZipFilePath);
-        ZipFile.CreateFromDirectory(inputDirPath, outputZipFilePath);
+        return "1.0.0";
     }
 
     public static void CreateZipFile(string inputDirPath, string outputDirPath, string outputZipFileName)
