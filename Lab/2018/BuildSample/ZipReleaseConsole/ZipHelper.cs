@@ -19,12 +19,12 @@ public static class ZipHelper
         nsm.AddNamespace("p", "http://schemas.microsoft.com/developer/msbuild/2003");
 
         var assemblyName = projXml.DocumentElement.SelectSingleNode("./p:PropertyGroup/p:AssemblyName", nsm).InnerText;
-        var projReleasePath = projXml.DocumentElement.SelectNodes("./p:PropertyGroup/p:OutputPath", nsm)
+        var outputPath = projXml.DocumentElement.SelectNodes("./p:PropertyGroup/p:OutputPath", nsm)
             .OfType<XmlElement>()
             .Single(xe => xe.ParentNode.Attributes["Condition"].Value.Contains("Release"))
             .InnerText;
 
-        var binDirPath = Path.Combine(projDirPath, projReleasePath);
+        var binDirPath = Path.Combine(projDirPath, outputPath);
         var version = GetAssemblyFileVersion(assemblyInfoFilePath);
         var outputZipFileName = string.Format("{0}-{1}.zip", assemblyName, version);
 
