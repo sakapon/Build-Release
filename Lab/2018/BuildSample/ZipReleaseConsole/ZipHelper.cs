@@ -17,7 +17,7 @@ public static class ZipHelper
         CreateZipFile(binDirPath, outputDirPath, outputZipFileName);
     }
 
-    static string GetAssemblyFileVersion(string assemblyFilePath)
+    internal static string GetAssemblyFileVersion(string assemblyFilePath)
     {
         var assembly = Assembly.LoadFrom(assemblyFilePath);
         var assemblyFileVersion = assembly.GetCustomAttribute<AssemblyFileVersionAttribute>();

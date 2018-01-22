@@ -7,6 +7,14 @@ namespace UnitTest.ZipRelease
     public class ZipHelperTest
     {
         [TestMethod]
+        public void GetAssemblyFileVersion_1()
+        {
+            var actual = ZipHelper.GetAssemblyFileVersion(@"..\Release\ZipReleaseConsole.exe");
+            Console.WriteLine(actual);
+            Assert.Inconclusive("See the console.");
+        }
+
+        [TestMethod]
         public void CreateZipFile_1()
         {
             ZipHelper.CreateZipFile(@"..\Release", @"..\zip", "CreateZipFile_1.zip");
