@@ -13,5 +13,6 @@ The PowerShell script to increment the assembly version on AssemblyInfo.
 
 ## References
 - [.NET Regular Expressions](https://msdn.microsoft.com/library/hs600312.aspx)
-- [.nuspec reference](https://docs.microsoft.com/en-us/nuget/schema/nuspec)
-- [Package versioning](https://docs.microsoft.com/en-us/nuget/reference/package-versioning)
+- [.nuspec File Reference for NuGet](https://docs.microsoft.com/en-us/nuget/schema/nuspec)
+- [NuGet Package Version Reference](https://docs.microsoft.com/en-us/nuget/reference/package-versioning)
+- [.NET ビルド小技集 (4)](https://sakapon.wordpress.com/2015/10/23/dotnet-build-4/) (my blog)
