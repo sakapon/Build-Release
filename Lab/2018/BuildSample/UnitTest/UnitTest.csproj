@@ -51,6 +51,8 @@
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="TestHelper.cs" />
     <Compile Include="VersionIncrement\ProgramTest.cs" />
+    <Compile Include="ZipRelease\ProgramTest.cs" />
+    <Compile Include="ZipRelease\ZipHelperTest.cs" />
   </ItemGroup>
   <ItemGroup>
     <None Include="packages.config" />
@@ -59,6 +61,10 @@
     <ProjectReference Include="..\VersionIncrementConsole\VersionIncrementConsole.csproj">
       <Project>{d0ab638e-a99d-4bfe-a47d-50bfc4e019e5}</Project>
       <Name>VersionIncrementConsole</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\ZipReleaseConsole\ZipReleaseConsole.csproj">
+      <Project>{850b41e3-d38a-4300-a304-df607fff0709}</Project>
+      <Name>ZipReleaseConsole</Name>
     </ProjectReference>
   </ItemGroup>
   <Import Project="$(VSToolsPath)\TeamTest\Microsoft.TestTools.targets" Condition="Exists('$(VSToolsPath)\TeamTest\Microsoft.TestTools.targets')" />
