@@ -1,5 +1,6 @@
 ﻿using System;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
+using static UnitTest.TestHelper;
 
 namespace UnitTest.ZipRelease
 {
@@ -9,9 +10,11 @@ namespace UnitTest.ZipRelease
         [TestMethod]
         public void GetAssemblyFileVersion_1()
         {
-            var actual = ZipHelper.GetAssemblyFileVersion(@"..\Release\ZipReleaseConsole.exe");
-            Console.WriteLine(actual);
-            Assert.Inconclusive("See the console.");
+            var Test = CreateAssertion<string, string>(ZipHelper.GetAssemblyFileVersion);
+
+            Test(
+                @"..\..\Properties\AssemblyInfo.cs",
+                "1.0.0");
         }
 
         [TestMethod]

@@ -2,6 +2,8 @@
 using System.IO;
 using System.IO.Compression;
 using System.Linq;
+using System.Text;
+using System.Text.RegularExpressions;
 using System.Xml;
 
 public static class ZipHelper
@@ -39,9 +41,13 @@ public static class ZipHelper
         return Directory.EnumerateFiles(dirPath, "AssemblyInfo.cs", SearchOption.AllDirectories).Single();
     }
 
+    // (?<=) Zero-width positive lookbehind assertion.
+    // (?=)  Zero-width positive lookahead assertion.
     internal static string GetAssemblyFileVersion(string assemblyInfoFilePath)
     {
-        return "1.0.0";
+        var contents = File.ReadAllText(assemblyInfoFilePath, Encoding.UTF8);
+        var match = Regex.Match(contents, @"(?<=AssemblyFileVersion\("").+?(?=""\))");
+        return match.Value;
     }
 
     public static void CreateZipFile(string inputDirPath, string outputDirPath, string outputZipFileName)
