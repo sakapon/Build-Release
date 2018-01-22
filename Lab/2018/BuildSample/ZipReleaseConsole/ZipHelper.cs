@@ -41,12 +41,13 @@ public static class ZipHelper
         return Directory.EnumerateFiles(dirPath, "AssemblyInfo.cs", SearchOption.AllDirectories).Single();
     }
 
+    // (?<!) Zero-width negative lookbehind assertion.
     // (?<=) Zero-width positive lookbehind assertion.
     // (?=)  Zero-width positive lookahead assertion.
     internal static string GetAssemblyFileVersion(string assemblyInfoFilePath)
     {
         var contents = File.ReadAllText(assemblyInfoFilePath, Encoding.UTF8);
-        var match = Regex.Match(contents, @"(?<=AssemblyFileVersion\("").+?(?=""\))");
+        var match = Regex.Match(contents, @"(?<!^\s*//.*)(?<=AssemblyFileVersion\("").+?(?=""\))", RegexOptions.Multiline);
         return match.Value;
     }
 
