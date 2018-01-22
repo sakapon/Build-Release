@@ -4,7 +4,7 @@ You can add the PowerShell script files to your project by NuGet.
 
 ## ZIP Release
 The PowerShell script to build the project and create a ZIP file.  
-This depends on the **Version Increment** (shown below).  
+This tool increments the assembly version before the build, so this depends on the **Version Increment** (shown below).  
 [NuGet Gallery | KTools.ZipRelease](https://www.nuget.org/packages/KTools.ZipRelease/)
 
 ## Version Increment
