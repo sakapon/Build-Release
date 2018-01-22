@@ -30,7 +30,7 @@ public static class ZipHelper
             .InnerText;
 
         var binDirPath = Path.Combine(projDirPath, projReleasePath);
-        var assemblyFileName = assemblyName + (outputType == "Exe" ? ".exe" : ".dll");
+        var assemblyFileName = assemblyName + (outputType.ToLowerInvariant().Contains("exe") ? ".exe" : ".dll");
         var assemblyFilePath = Path.Combine(binDirPath, assemblyFileName);
 
         var version = GetAssemblyFileVersion(assemblyFilePath);
