@@ -2,7 +2,7 @@
 <package>
   <metadata>
     <id>KTools.VersionIncrement</id>
-    <version>1.1.2</version>
+    <version>1.2.4</version>
     <title>Version Increment</title>
     <authors>Keiho Sakapon</authors>
     <owners>Keiho Sakapon</owners>
@@ -15,6 +15,6 @@
     <tags>Version Increment Assembly AssemblyInfo PowerShell</tags>
   </metadata>
   <files>
-    <file src="VersionIncrement.ps1" target="content" />
+    <file src="KTools.VersionIncrement.ps1" target="content" />
   </files>
 </package>

@@ -68,7 +68,7 @@ public static class ZipHelper
 "@
 
 
-.\VersionIncrement.ps1
+.\KTools.VersionIncrement.ps1
 
 msbuild /p:Configuration=Release /t:Clean
 msbuild /p:Configuration=Release /t:Rebuild

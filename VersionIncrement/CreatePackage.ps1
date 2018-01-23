@@ -10,7 +10,7 @@ public static class Program
         var format = File.ReadAllText("CSharp-Format.ps1.txt", Encoding.UTF8);
         var cs_script = File.ReadAllText(@"..\Lab\2018\BuildSample\VersionIncrementConsole\Program.cs", Encoding.UTF8);
         var ps_script = string.Format(format, cs_script);
-        File.WriteAllText("VersionIncrement.ps1", ps_script, Encoding.UTF8);
+        File.WriteAllText("KTools.VersionIncrement.ps1", ps_script, Encoding.UTF8);
 
         return 0;
     }
