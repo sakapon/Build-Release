@@ -10,7 +10,7 @@
     <projectUrl>https://github.com/sakapon/ZIP-Release</projectUrl>
     <requireLicenseAcceptance>false</requireLicenseAcceptance>
     <description>The PowerShell script to increment the assembly version on AssemblyInfo.</description>
-    <releaseNotes></releaseNotes>
+    <releaseNotes>Rename .ps1 file.</releaseNotes>
     <copyright>© 2018 Keiho Sakapon</copyright>
     <tags>Version Increment Assembly AssemblyInfo PowerShell</tags>
   </metadata>

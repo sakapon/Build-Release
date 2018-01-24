@@ -10,7 +10,7 @@
     <projectUrl>https://github.com/sakapon/ZIP-Release</projectUrl>
     <requireLicenseAcceptance>false</requireLicenseAcceptance>
     <description>The PowerShell script to build the project and create a ZIP file.</description>
-    <releaseNotes></releaseNotes>
+    <releaseNotes>Rename .ps1 file.</releaseNotes>
     <copyright>© 2018 Keiho Sakapon</copyright>
     <tags>ZIP Release Build MSBuild PowerShell</tags>
     <dependencies>
