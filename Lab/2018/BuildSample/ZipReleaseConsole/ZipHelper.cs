@@ -8,11 +8,31 @@ using System.Xml;
 
 public static class ZipHelper
 {
+    const string MSBuildExeName = "MSBuild.exe";
+
+    public static string GetMSBuildPath()
+    {
+        var programFiles = Environment.GetFolderPath(Environment.SpecialFolder.ProgramFilesX86);
+        var msvs = Path.Combine(programFiles, "Microsoft Visual Studio");
+        var msb = Path.Combine(programFiles, "MSBuild");
+        var msbuilds = Directory.EnumerateFiles(msvs, MSBuildExeName, SearchOption.AllDirectories)
+            .Concat(Directory.EnumerateFiles(msb, MSBuildExeName, SearchOption.AllDirectories))
+            .ToArray();
+
+        var msbuildVersionPattern = new Regex(@"(?<=MSBuild\\).+?(?=\\)");
+        var msbuild = msbuilds
+            .Where(p => !p.Contains("amd64"))
+            .OrderByDescending(p => double.Parse(msbuildVersionPattern.Match(p).Value))
+            .FirstOrDefault();
+
+        return msbuild ?? GetMSBuildPathFromNetFW();
+    }
+
     internal static string GetMSBuildPathFromNetFW()
     {
         var windows = Environment.GetFolderPath(Environment.SpecialFolder.Windows);
         var netfw = Path.Combine(windows, @"Microsoft.NET\Framework");
-        var msbuilds = Directory.GetFiles(netfw, "MSBuild.exe", SearchOption.AllDirectories);
+        var msbuilds = Directory.GetFiles(netfw, MSBuildExeName, SearchOption.AllDirectories);
 
         var netfwVersionPattern = new Regex(@"(?<=v)\d+(?=\.)");
         return msbuilds

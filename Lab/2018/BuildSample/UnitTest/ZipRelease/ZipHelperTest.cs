@@ -8,6 +8,14 @@ namespace UnitTest.ZipRelease
     public class ZipHelperTest
     {
         [TestMethod]
+        public void GetMSBuildPath_1()
+        {
+            var actual = ZipHelper.GetMSBuildPath();
+            var expected = @"C:\Program Files (x86)\Microsoft Visual Studio\2017\Enterprise\MSBuild\15.0\Bin\MSBuild.exe";
+            Assert.IsTrue(string.Equals(expected, actual, StringComparison.InvariantCultureIgnoreCase));
+        }
+
+        [TestMethod]
         public void GetMSBuildPathFromNetFW_1()
         {
             var actual = ZipHelper.GetMSBuildPathFromNetFW();
