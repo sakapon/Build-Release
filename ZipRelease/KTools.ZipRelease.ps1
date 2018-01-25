@@ -1,8 +1,4 @@
-﻿# Sets the alias of MSBuild.exe.
-# sal msbuild "C:\Windows\Microsoft.NET\Framework\v4.0.30319\MSBuild.exe"
-sal msbuild "C:\Program Files (x86)\MSBuild\14.0\Bin\MSBuild.exe"
-
-$references = @("System.IO.Compression.FileSystem", "System.Xml")
+﻿$references = @("System.IO.Compression.FileSystem", "System.Xml")
 $source = @"
 using System;
 using System.Collections.Generic;
@@ -102,13 +98,20 @@ public static class ZipHelper
     }
 }
 "@
+Add-Type -TypeDefinition $source -Language CSharp -ReferencedAssemblies $references
 
 
 .\KTools.VersionIncrement.ps1
 
+$msbuildPath = [ZipHelper]::GetMSBuildPath()
+if (-not ($msbuildPath)) { exit 100 }
+
+# Sets the alias of MSBuild.exe.
+echo $msbuildPath
+sal msbuild $msbuildPath
+
 msbuild /p:Configuration=Release /t:Clean
 msbuild /p:Configuration=Release /t:Rebuild
-if ($LASTEXITCODE -ne 0) { exit 100 }
+if ($LASTEXITCODE -ne 0) { exit 101 }
 
-Add-Type -TypeDefinition $source -Language CSharp -ReferencedAssemblies $references
 [ZipHelper]::CreateZipFileForAssembly()
