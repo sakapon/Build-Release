@@ -2,7 +2,7 @@
 <package>
   <metadata>
     <id>KTools.ZipRelease</id>
-    <version>1.2.4</version>
+    <version>1.2.5</version>
     <title>ZIP Release</title>
     <authors>Keiho Sakapon</authors>
     <owners>Keiho Sakapon</owners>
@@ -10,7 +10,7 @@
     <projectUrl>https://github.com/sakapon/ZIP-Release</projectUrl>
     <requireLicenseAcceptance>false</requireLicenseAcceptance>
     <description>The PowerShell script to build the project and create a ZIP file.</description>
-    <releaseNotes>Rename .ps1 file.</releaseNotes>
+    <releaseNotes>Find the path to MSBuild.exe.</releaseNotes>
     <copyright>© 2018 Keiho Sakapon</copyright>
     <tags>ZIP Release Build MSBuild PowerShell</tags>
     <dependencies>
