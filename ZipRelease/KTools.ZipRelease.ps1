@@ -34,6 +34,7 @@ public static class ZipHelper
         var version = GetAssemblyFileVersion(assemblyInfoFilePath);
         var outputZipFileName = string.Format("{0}-{1}.zip", assemblyName, version);
 
+        Console.WriteLine("Zipping: {0} >> {1}", binDirPath, Path.Combine(outputDirPath, outputZipFileName));
         CreateZipFile(binDirPath, outputDirPath, outputZipFileName);
     }
 
@@ -49,6 +50,7 @@ public static class ZipHelper
 
     // (?<!) Zero-width negative lookbehind assertion.
     // (?<=) Zero-width positive lookbehind assertion.
+    // (?!)  Zero-width negative lookahead assertion.
     // (?=)  Zero-width positive lookahead assertion.
     internal static string GetAssemblyFileVersion(string assemblyInfoFilePath)
     {
@@ -72,6 +74,7 @@ public static class ZipHelper
 
 msbuild /p:Configuration=Release /t:Clean
 msbuild /p:Configuration=Release /t:Rebuild
+if ($LASTEXITCODE -ne 0) { exit 100 }
 
 Add-Type -TypeDefinition $source -Language CSharp -ReferencedAssemblies $references
 [ZipHelper]::CreateZipFileForAssembly()

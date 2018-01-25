@@ -11,6 +11,7 @@ $source = @"
 
 msbuild /p:Configuration=Release /t:Clean
 msbuild /p:Configuration=Release /t:Rebuild
+if ($LASTEXITCODE -ne 0) {{ exit 100 }}
 
 Add-Type -TypeDefinition $source -Language CSharp -ReferencedAssemblies $references
 [ZipHelper]::CreateZipFileForAssembly()
