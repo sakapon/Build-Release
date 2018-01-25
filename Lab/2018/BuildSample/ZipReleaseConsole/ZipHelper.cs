@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Collections.Generic;
 using System.IO;
 using System.IO.Compression;
 using System.Linq;
@@ -8,16 +9,12 @@ using System.Xml;
 
 public static class ZipHelper
 {
-    const string MSBuildExeName = "MSBuild.exe";
-
     public static string GetMSBuildPath()
     {
         var programFiles = Environment.GetFolderPath(Environment.SpecialFolder.ProgramFilesX86);
         var msvs = Path.Combine(programFiles, "Microsoft Visual Studio");
         var msb = Path.Combine(programFiles, "MSBuild");
-        var msbuilds = Directory.EnumerateFiles(msvs, MSBuildExeName, SearchOption.AllDirectories)
-            .Concat(Directory.EnumerateFiles(msb, MSBuildExeName, SearchOption.AllDirectories))
-            .ToArray();
+        var msbuilds = GetMSBuildPaths(msvs).Concat(GetMSBuildPaths(msb)).ToArray();
 
         var msbuildVersionPattern = new Regex(@"(?<=MSBuild\\).+?(?=\\)");
         var msbuild = msbuilds
@@ -32,12 +29,17 @@ public static class ZipHelper
     {
         var windows = Environment.GetFolderPath(Environment.SpecialFolder.Windows);
         var netfw = Path.Combine(windows, @"Microsoft.NET\Framework");
-        var msbuilds = Directory.GetFiles(netfw, MSBuildExeName, SearchOption.AllDirectories);
+        var msbuilds = GetMSBuildPaths(netfw).ToArray();
 
         var netfwVersionPattern = new Regex(@"(?<=v)\d+(?=\.)");
         return msbuilds
             .OrderByDescending(p => int.Parse(netfwVersionPattern.Match(p).Value))
             .FirstOrDefault();
+    }
+
+    static IEnumerable<string> GetMSBuildPaths(string dirPath)
+    {
+        return Directory.Exists(dirPath) ? Directory.EnumerateFiles(dirPath, "MSBuild.exe", SearchOption.AllDirectories) : Enumerable.Empty<string>();
     }
 
     public static void CreateZipFileForAssembly(string projDirPath = ".", string outputDirPath = "zip")
