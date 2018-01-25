@@ -11,8 +11,9 @@ namespace ZipReleaseConsole
     {
         static void Main(string[] args)
         {
-            ZipHelper.CreateZipFileForAssembly(@"..\..\");
-            ZipHelper.CreateZipFileForAssembly(@"..\..\..\UnitTest");
+            ZipHelper.CreateZipFileForAssembly();
+            //ZipHelper.CreateZipFileForAssembly(@"..\..\");
+            //ZipHelper.CreateZipFileForAssembly(@"..\..\..\UnitTest");
         }
 
         internal static string GetAssemblyFileVersion(string assemblyFilePath)

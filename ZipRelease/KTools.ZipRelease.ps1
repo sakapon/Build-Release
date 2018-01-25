@@ -1,10 +1,7 @@
-﻿# Sets the alias of MSBuild.exe.
-# sal msbuild "C:\Windows\Microsoft.NET\Framework\v4.0.30319\MSBuild.exe"
-sal msbuild "C:\Program Files (x86)\MSBuild\14.0\Bin\MSBuild.exe"
-
-$references = @("System.IO.Compression.FileSystem", "System.Xml")
+﻿$references = @("System.IO.Compression.FileSystem", "System.Xml")
 $source = @"
 using System;
+using System.Collections.Generic;
 using System.IO;
 using System.IO.Compression;
 using System.Linq;
@@ -14,6 +11,39 @@ using System.Xml;
 
 public static class ZipHelper
 {
+    public static string GetMSBuildPath()
+    {
+        var programFiles = Environment.GetFolderPath(Environment.SpecialFolder.ProgramFilesX86);
+        var msvs = Path.Combine(programFiles, "Microsoft Visual Studio");
+        var msb = Path.Combine(programFiles, "MSBuild");
+        var msbuilds = GetMSBuildPaths(msvs).Concat(GetMSBuildPaths(msb)).ToArray();
+
+        var msbuildVersionPattern = new Regex(@"(?<=MSBuild\\).+?(?=\\)");
+        var msbuild = msbuilds
+            .Where(p => !p.Contains("amd64"))
+            .OrderByDescending(p => double.Parse(msbuildVersionPattern.Match(p).Value))
+            .FirstOrDefault();
+
+        return msbuild ?? GetMSBuildPathFromNetFW();
+    }
+
+    internal static string GetMSBuildPathFromNetFW()
+    {
+        var windows = Environment.GetFolderPath(Environment.SpecialFolder.Windows);
+        var netfw = Path.Combine(windows, @"Microsoft.NET\Framework");
+        var msbuilds = GetMSBuildPaths(netfw).ToArray();
+
+        var netfwVersionPattern = new Regex(@"(?<=v)\d+(?=\.)");
+        return msbuilds
+            .OrderByDescending(p => int.Parse(netfwVersionPattern.Match(p).Value))
+            .FirstOrDefault();
+    }
+
+    static IEnumerable<string> GetMSBuildPaths(string dirPath)
+    {
+        return Directory.Exists(dirPath) ? Directory.EnumerateFiles(dirPath, "MSBuild.exe", SearchOption.AllDirectories) : Enumerable.Empty<string>();
+    }
+
     public static void CreateZipFileForAssembly(string projDirPath = ".", string outputDirPath = "zip")
     {
         var projFilePath = GetProjFilePath(projDirPath);
@@ -34,6 +64,7 @@ public static class ZipHelper
         var version = GetAssemblyFileVersion(assemblyInfoFilePath);
         var outputZipFileName = string.Format("{0}-{1}.zip", assemblyName, version);
 
+        Console.WriteLine("Zipping: {0} >> {1}", binDirPath, Path.Combine(outputDirPath, outputZipFileName));
         CreateZipFile(binDirPath, outputDirPath, outputZipFileName);
     }
 
@@ -49,6 +80,7 @@ public static class ZipHelper
 
     // (?<!) Zero-width negative lookbehind assertion.
     // (?<=) Zero-width positive lookbehind assertion.
+    // (?!)  Zero-width negative lookahead assertion.
     // (?=)  Zero-width positive lookahead assertion.
     internal static string GetAssemblyFileVersion(string assemblyInfoFilePath)
     {
@@ -66,12 +98,20 @@ public static class ZipHelper
     }
 }
 "@
+Add-Type -TypeDefinition $source -Language CSharp -ReferencedAssemblies $references
 
 
 .\KTools.VersionIncrement.ps1
 
+$msbuildPath = [ZipHelper]::GetMSBuildPath()
+if (-not ($msbuildPath)) { exit 100 }
+
+# Sets the alias of MSBuild.exe.
+echo $msbuildPath
+sal msbuild $msbuildPath
+
 msbuild /p:Configuration=Release /t:Clean
 msbuild /p:Configuration=Release /t:Rebuild
+if ($LASTEXITCODE -ne 0) { exit 101 }
 
-Add-Type -TypeDefinition $source -Language CSharp -ReferencedAssemblies $references
 [ZipHelper]::CreateZipFileForAssembly()

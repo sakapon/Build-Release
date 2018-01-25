@@ -7,6 +7,14 @@ The PowerShell script to build the project and create a ZIP file.
 This tool increments the assembly version before the build, so this depends on the **Version Increment** (shown below).  
 [NuGet Gallery | KTools.ZipRelease](https://www.nuget.org/packages/KTools.ZipRelease/)
 
+### Specification
+- Increment the version
+  - build number (z of "x.y.z")
+- Build a release by MSBuild
+- Create a ZIP file from the build result
+
+You can customize the PowerShell script to meet your needs.
+
 ## Version Increment
 The PowerShell script to increment the assembly version on AssemblyInfo.  
 [NuGet Gallery | KTools.VersionIncrement](https://www.nuget.org/packages/KTools.VersionIncrement/)
