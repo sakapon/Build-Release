@@ -8,6 +8,18 @@ using System.Xml;
 
 public static class ZipHelper
 {
+    internal static string GetMSBuildPathFromNetFW()
+    {
+        var windows = Environment.GetFolderPath(Environment.SpecialFolder.Windows);
+        var netfw = Path.Combine(windows, @"Microsoft.NET\Framework");
+        var msbuilds = Directory.GetFiles(netfw, "MSBuild.exe", SearchOption.AllDirectories);
+
+        var netfwVersionPattern = new Regex(@"(?<=v)\d+(?=\.)");
+        return msbuilds
+            .OrderByDescending(p => int.Parse(netfwVersionPattern.Match(p).Value))
+            .FirstOrDefault();
+    }
+
     public static void CreateZipFileForAssembly(string projDirPath = ".", string outputDirPath = "zip")
     {
         var projFilePath = GetProjFilePath(projDirPath);
