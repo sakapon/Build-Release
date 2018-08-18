@@ -25,6 +25,7 @@ public static class Program
 
     internal static void IncrementForFile(string filePath)
     {
+        Console.WriteLine(filePath);
         var contents = File.ReadLines(filePath, Encoding.UTF8)
             .Select(IncrementForLine)
             .ToArray();
@@ -37,7 +38,13 @@ public static class Program
 
     internal static string IncrementForLine(string line)
     {
-        return BuildNumberPattern.Replace(line, m => IncrementNumber(m.Value));
+        var newLine = BuildNumberPattern.Replace(line, m => IncrementNumber(m.Value));
+        if (newLine != line)
+        {
+            Console.WriteLine("<< {0}", line);
+            Console.WriteLine(">> {0}", newLine);
+        }
+        return newLine;
     }
 
     static string IncrementNumber(string i)
