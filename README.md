@@ -1,10 +1,10 @@
-# ZIP Release
-[![license](https://img.shields.io/github/license/sakapon/ZIP-Release.svg)](https://github.com/sakapon/ZIP-Release/blob/master/LICENSE)
+# Build Release
+[![license](https://img.shields.io/github/license/sakapon/Build-Release.svg)](https://github.com/sakapon/Build-Release/blob/master/LICENSE)
 
-A set of tools to build a Visual Studio project and create a ZIP file.  
+A set of tools to build a Visual Studio project.  
 You can add the PowerShell script files to your project by NuGet.
 
-## ZIP Release
+## Zip Release
 The PowerShell script to build the project and create a ZIP file.  
 This tool increments the assembly version before the build, so this depends on the **Version Increment** (shown below).
 
