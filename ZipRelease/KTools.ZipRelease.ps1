@@ -101,7 +101,10 @@ public static class ZipHelper
 Add-Type -TypeDefinition $source -Language CSharp -ReferencedAssemblies $references
 
 
-.\KTools.VersionIncrement.ps1
+$scriptDir = Split-Path $MyInvocation.MyCommand.Path -Parent
+$versionIncrementPath = Join-Path $scriptDir KTools.VersionIncrement.ps1 -Resolve
+echo $versionIncrementPath
+. $versionIncrementPath
 
 $msbuildPath = [ZipHelper]::GetMSBuildPath()
 if (-not ($msbuildPath)) { exit 100 }
