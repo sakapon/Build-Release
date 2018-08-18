@@ -3,16 +3,16 @@
   <metadata>
     <id>KTools.ZipRelease</id>
     <version>1.2.6</version>
-    <title>ZIP Release</title>
+    <title>Zip Release</title>
     <authors>Keiho Sakapon</authors>
     <owners>Keiho Sakapon</owners>
-    <licenseUrl>https://github.com/sakapon/ZIP-Release/blob/master/LICENSE</licenseUrl>
-    <projectUrl>https://github.com/sakapon/ZIP-Release</projectUrl>
+    <licenseUrl>https://github.com/sakapon/Build-Release/blob/master/LICENSE</licenseUrl>
+    <projectUrl>https://github.com/sakapon/Build-Release</projectUrl>
     <requireLicenseAcceptance>false</requireLicenseAcceptance>
     <description>The PowerShell script to build the project and create a ZIP file.</description>
     <releaseNotes>Find the path to KTools.VersionIncrement.ps1, regardless of the current directory.</releaseNotes>
     <copyright>© 2018 Keiho Sakapon</copyright>
-    <tags>ZIP Release Build MSBuild PowerShell</tags>
+    <tags>Build Release ZIP MSBuild PowerShell</tags>
     <dependencies>
       <dependency id="KTools.VersionIncrement" version="[1.2.6]" />
     </dependencies>

@@ -6,13 +6,13 @@
     <title>Version Increment</title>
     <authors>Keiho Sakapon</authors>
     <owners>Keiho Sakapon</owners>
-    <licenseUrl>https://github.com/sakapon/ZIP-Release/blob/master/LICENSE</licenseUrl>
-    <projectUrl>https://github.com/sakapon/ZIP-Release</projectUrl>
+    <licenseUrl>https://github.com/sakapon/Build-Release/blob/master/LICENSE</licenseUrl>
+    <projectUrl>https://github.com/sakapon/Build-Release</projectUrl>
     <requireLicenseAcceptance>false</requireLicenseAcceptance>
     <description>The PowerShell script to increment the assembly version on AssemblyInfo.</description>
     <releaseNotes>Write log to the console.</releaseNotes>
     <copyright>© 2018 Keiho Sakapon</copyright>
-    <tags>Version Increment Assembly AssemblyInfo PowerShell</tags>
+    <tags>Build Release Version Increment Assembly AssemblyInfo PowerShell</tags>
   </metadata>
   <files>
     <file src="KTools.VersionIncrement.ps1" target="content" />
