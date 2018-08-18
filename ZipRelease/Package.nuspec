@@ -14,7 +14,7 @@
     <copyright>© 2018 Keiho Sakapon</copyright>
     <tags>ZIP Release Build MSBuild PowerShell</tags>
     <dependencies>
-      <dependency id="KTools.VersionIncrement" version="[1.2.4]" />
+      <dependency id="KTools.VersionIncrement" version="[1.2.6]" />
     </dependencies>
   </metadata>
   <files>

@@ -2,7 +2,7 @@
 <package>
   <metadata>
     <id>KTools.VersionIncrement</id>
-    <version>1.2.4</version>
+    <version>1.2.6</version>
     <title>Version Increment</title>
     <authors>Keiho Sakapon</authors>
     <owners>Keiho Sakapon</owners>
@@ -10,7 +10,7 @@
     <projectUrl>https://github.com/sakapon/ZIP-Release</projectUrl>
     <requireLicenseAcceptance>false</requireLicenseAcceptance>
     <description>The PowerShell script to increment the assembly version on AssemblyInfo.</description>
-    <releaseNotes>Rename .ps1 file.</releaseNotes>
+    <releaseNotes>Write log to the console.</releaseNotes>
     <copyright>© 2018 Keiho Sakapon</copyright>
     <tags>Version Increment Assembly AssemblyInfo PowerShell</tags>
   </metadata>
