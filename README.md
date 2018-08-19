@@ -5,7 +5,7 @@ A set of tools to build a Visual Studio project.
 
 There are options to use the tools:
 - Add the PowerShell script files to Visual Studio projects by NuGet
-- Download and extract [the PowerShell script files](https://github.com/sakapon/Build-Release/tree/master/Downloads) to any folder
+- Download [the PowerShell script files](https://github.com/sakapon/Build-Release/tree/master/Downloads) and extract them to any folder
 - Add the PowerShell scripts above to `External Tools` in Visual Studio (recommended)
 
 See [Usage](#usage) for details.
@@ -19,7 +19,7 @@ The PowerShell script to increment the assembly version on AssemblyInfo.
 
 ### Specification
 - Increment the assembly version on AssemblyInfo.cs
-  - build number (z of "x.y.z")
+  - build number (`z` of `x.y.z`)
 
 ## Zip Release
 The PowerShell script to build the project and create a ZIP file.
@@ -37,7 +37,7 @@ The PowerShell script to build the project and create a ZIP file.
 There are options to use the tools:
 - Add the PowerShell script files to Visual Studio projects by NuGet
   - Execute the scripts on the project folder
-- Download and extract the latest version of [the PowerShell script files](https://github.com/sakapon/Build-Release/tree/master/Downloads) to any folder
+- Download the latest version of [the PowerShell script files](https://github.com/sakapon/Build-Release/tree/master/Downloads) and extract them to any folder
   - Execute the scripts on the project folder
 - Add the PowerShell scripts above to `External Tools` in Visual Studio (recommended)
   - Execute the menu on the project
@@ -51,6 +51,8 @@ Choose the menu `Tools > External Tools`, and add a new content with the followi
 - Arguments: `-ExecutionPolicy Unrestricted C:\scripts_folder\KTools.xxx.ps1`
 - Initial directory: `$(ProjectDir)` or `$(SolutionDir)`
 - Use Output window: `On`
+
+![ExternalTools](docs/images/ExternalTools.png)
 
 ## Release Notes
 - **v1.2.6** Find the path to KTools.VersionIncrement.ps1, regardless of the current directory.
