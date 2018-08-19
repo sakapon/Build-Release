@@ -5,7 +5,7 @@ A set of tools to build a Visual Studio project.
 
 There are options to use the tools:
 - Add the PowerShell script files to Visual Studio projects by NuGet
-- Download and extract the PowerShell script files to any folder
+- Download and extract [the PowerShell script files](https://github.com/sakapon/Build-Release/tree/master/Downloads) to any folder
 - Add the PowerShell scripts above to `External Tools` in Visual Studio (recommended)
 
 See [Usage](#usage) for details.
@@ -37,7 +37,7 @@ The PowerShell script to build the project and create a ZIP file.
 There are options to use the tools:
 - Add the PowerShell script files to Visual Studio projects by NuGet
   - Execute the scripts on the project folder
-- Download and extract the latest version of the PowerShell script files from [Downloads](https://github.com/sakapon/Build-Release/tree/master/Downloads) to any folder
+- Download and extract the latest version of [the PowerShell script files](https://github.com/sakapon/Build-Release/tree/master/Downloads) to any folder
   - Execute the scripts on the project folder
 - Add the PowerShell scripts above to `External Tools` in Visual Studio (recommended)
   - Execute the menu on the project
@@ -45,9 +45,10 @@ There are options to use the tools:
 You can customize the PowerShell script to meet your needs.
 
 ### How to Add the Tools to `External Tools` in Visual Studio
+Choose the menu `Tools > External Tools`, and add a new content with the following information:
 - Title: any
 - Command: `powershell.exe`
-- Arguments: `-ExecutionPolicy Unrestricted (the path to .ps1 file)`
+- Arguments: `-ExecutionPolicy Unrestricted C:\scripts_folder\KTools.xxx.ps1`
 - Initial directory: `$(ProjectDir)` or `$(SolutionDir)`
 - Use Output window: `On`
 
