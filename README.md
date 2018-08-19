@@ -3,6 +3,10 @@ A set of tools to build a Visual Studio project.
 
 [![license](https://img.shields.io/github/license/sakapon/Build-Release.svg)](https://github.com/sakapon/Build-Release/blob/master/LICENSE)
 
+The following tools are contained:
+- [Version Increment](#version-increment)
+- [Zip Release](#zip-release)
+
 There are options to use the tools:
 - Add the PowerShell script files to Visual Studio projects by NuGet
 - Download [the PowerShell script files](https://github.com/sakapon/Build-Release/tree/master/Downloads) and extract them to any folder
@@ -55,9 +59,9 @@ Choose the menu `Tools > External Tools`, and add a new content with the followi
 ![ExternalTools](docs/images/ExternalTools.png)
 
 ## Release Notes
-- **v1.2.6** Find the path to KTools.VersionIncrement.ps1, regardless of the current directory.
+- **v1.2.6** Find the path to .ps1 files, regardless of the current directory.
 - **v1.2.5** Find the path to MSBuild.exe.
-- **v1.2.4** Rename .ps1 file.
+- **v1.2.4** Rename .ps1 files.
 - **v1.1.3** The first release.
 
 ## References
