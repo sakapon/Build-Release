@@ -1,24 +1,9 @@
 # Build Release
+A set of tools to build a Visual Studio project.
+
 [![license](https://img.shields.io/github/license/sakapon/Build-Release.svg)](https://github.com/sakapon/Build-Release/blob/master/LICENSE)
 
-A set of tools to build a Visual Studio project.  
 You can add the PowerShell script files to your project by NuGet.
-
-## Zip Release
-The PowerShell script to build the project and create a ZIP file.  
-This tool increments the assembly version before the build, so this depends on the **Version Increment** (shown below).
-
-[![NuGet](https://img.shields.io/nuget/v/KTools.ZipRelease.svg)](https://www.nuget.org/packages/KTools.ZipRelease/)
-[![NuGet](https://img.shields.io/nuget/dt/KTools.ZipRelease.svg)](https://www.nuget.org/packages/KTools.ZipRelease/)  
-[NuGet Gallery | KTools.ZipRelease](https://www.nuget.org/packages/KTools.ZipRelease/)
-
-### Specification
-- Increment the version
-  - build number (z of "x.y.z")
-- Build a release by MSBuild
-- Create a ZIP file from the build result
-
-You can customize the PowerShell script to meet your needs.
 
 ## Version Increment
 The PowerShell script to increment the assembly version on AssemblyInfo.
@@ -26,6 +11,24 @@ The PowerShell script to increment the assembly version on AssemblyInfo.
 [![NuGet](https://img.shields.io/nuget/v/KTools.VersionIncrement.svg)](https://www.nuget.org/packages/KTools.VersionIncrement/)
 [![NuGet](https://img.shields.io/nuget/dt/KTools.VersionIncrement.svg)](https://www.nuget.org/packages/KTools.VersionIncrement/)  
 [NuGet Gallery | KTools.VersionIncrement](https://www.nuget.org/packages/KTools.VersionIncrement/)
+
+### Specification
+- Increment the version
+  - build number (z of "x.y.z")
+
+## Zip Release
+The PowerShell script to build the project and create a ZIP file.
+
+[![NuGet](https://img.shields.io/nuget/v/KTools.ZipRelease.svg)](https://www.nuget.org/packages/KTools.ZipRelease/)
+[![NuGet](https://img.shields.io/nuget/dt/KTools.ZipRelease.svg)](https://www.nuget.org/packages/KTools.ZipRelease/)  
+[NuGet Gallery | KTools.ZipRelease](https://www.nuget.org/packages/KTools.ZipRelease/)
+
+### Specification
+- Increment the version (Call the [**Version Increment**](#version-increment))
+- Build a release by MSBuild
+- Create a ZIP file from the build result
+
+You can customize the PowerShell script to meet your needs.
 
 ## References
 - [.NET Regular Expressions](https://msdn.microsoft.com/library/hs600312.aspx)
