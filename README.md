@@ -71,4 +71,4 @@ Choose the menu `Tools > External Tools`, and add a new content with the followi
 - [Manage external tools](https://docs.microsoft.com/en-us/visualstudio/ide/managing-external-tools)
 - [.NET ビルド小技集 (4)](https://sakapon.wordpress.com/2015/10/23/dotnet-build-4/) (my blog)
 - [ビルドして ZIP にする PowerShell スクリプト](https://sakapon.wordpress.com/2018/02/06/zip-release/) (my blog)
-- [ビルド用のスクリプトを Visual Studio の外部ツールに登録する](https://sakapon.wordpress.com/2018/08/20/external-tools-build/)
+- [ビルド用のスクリプトを Visual Studio の外部ツールに登録する](https://sakapon.wordpress.com/2018/08/20/external-tools-build/) (my blog)
