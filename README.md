@@ -48,7 +48,7 @@ There are options to use the tools:
 
 You can customize the PowerShell script to meet your needs.
 
-### How to Add the Tools to `External Tools` in Visual Studio
+### How to Add the Scripts to `External Tools` in Visual Studio
 Choose the menu `Tools > External Tools`, and add a new content with the following information:
 - Title: any
 - Command: `powershell.exe`
@@ -71,3 +71,4 @@ Choose the menu `Tools > External Tools`, and add a new content with the followi
 - [Manage external tools](https://docs.microsoft.com/en-us/visualstudio/ide/managing-external-tools)
 - [.NET ビルド小技集 (4)](https://sakapon.wordpress.com/2015/10/23/dotnet-build-4/) (my blog)
 - [ビルドして ZIP にする PowerShell スクリプト](https://sakapon.wordpress.com/2018/02/06/zip-release/) (my blog)
+- [ビルド用のスクリプトを Visual Studio の外部ツールに登録する](https://sakapon.wordpress.com/2018/08/20/external-tools-build/)
