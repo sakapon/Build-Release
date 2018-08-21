@@ -52,7 +52,7 @@ You can customize the PowerShell script to meet your needs.
 Choose the menu `Tools > External Tools`, and add a new content with the following information:
 - Title: any
 - Command: `powershell.exe`
-- Arguments: `-ExecutionPolicy Unrestricted C:\scripts_folder\KTools.xxx.ps1`
+- Arguments: `-ExecutionPolicy Unrestricted "C:\scripts_folder\KTools.xxx.ps1"`
 - Initial directory: `$(ProjectDir)` or `$(SolutionDir)`
 - Use Output window: `On`
 
