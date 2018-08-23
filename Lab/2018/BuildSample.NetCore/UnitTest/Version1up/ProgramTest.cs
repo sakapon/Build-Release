@@ -10,7 +10,7 @@ namespace UnitTest.Version1up
         [TestMethod]
         public void IncrementForFile_1()
         {
-            Program.IncrementForFile(@"..\..\Properties\AssemblyInfo.cs");
+            Program.IncrementForFile(@"..\..\..\UnitTest.csproj");
             Assert.Inconclusive("See the file.");
         }
 
@@ -20,23 +20,20 @@ namespace UnitTest.Version1up
             var Test = CreateAssertion<string, string>(Program.IncrementForLine);
 
             Test(
-                "[assembly: AssemblyVersion(\"1.0.0.0\")]",
-                "[assembly: AssemblyVersion(\"1.0.1.0\")]");
+                "    <Version>1.23.456</Version>",
+                "    <Version>1.23.457</Version>");
             Test(
-                "[assembly: AssemblyFileVersion(\"1.23.456\")]",
-                "[assembly: AssemblyFileVersion(\"1.23.457\")]");
+                "    <AssemblyVersion>1.0.0.0</AssemblyVersion>",
+                "    <AssemblyVersion>1.0.1.0</AssemblyVersion>");
             Test(
-                "[assembly: AssemblyFileVersion(\"1.23.456-beta\")]",
-                "[assembly: AssemblyFileVersion(\"1.23.457-beta\")]");
+                "    <FileVersion>12.34.0</FileVersion>",
+                "    <FileVersion>12.34.1</FileVersion>");
             Test(
-                "// [assembly: AssemblyVersion(\"1.0.0.0\")]",
-                "// [assembly: AssemblyVersion(\"1.0.0.0\")]");
+                "<Version>1.23.456-beta</Version>",
+                "<Version>1.23.457-beta</Version>");
             Test(
-                " // [assembly: AssemblyVersion(\"1.0.0.0\")]",
-                " // [assembly: AssemblyVersion(\"1.0.0.0\")]");
-            Test(
-                "[assembly: AssemblyCompany(\"Xyz Company\")]",
-                "[assembly: AssemblyCompany(\"Xyz Company\")]");
+                "    <Authors>Xyz Company</Authors>",
+                "    <Authors>Xyz Company</Authors>");
         }
     }
 }
