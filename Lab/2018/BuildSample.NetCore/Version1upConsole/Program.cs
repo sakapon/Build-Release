@@ -12,12 +12,26 @@ public static class Program
         // args[0]: The target directory path (optional).
         var dirPath = args.Length > 0 ? args[0] : ".";
 
+        foreach (var filePath in GetProjFilePath(dirPath))
+            IncrementForFile(filePath);
+
         return 0;
     }
 
+    static IEnumerable<string> GetProjFilePath(string dirPath)
+    {
+        return Directory.EnumerateFiles(dirPath, "*.csproj", SearchOption.AllDirectories);
+    }
+
+    static readonly Encoding UTF8N = new UTF8Encoding();
+
     internal static void IncrementForFile(string filePath)
     {
-        throw new NotImplementedException();
+        Console.WriteLine(filePath);
+        var contents = File.ReadLines(filePath, UTF8N)
+            .Select(IncrementForLine)
+            .ToArray();
+        File.WriteAllLines(filePath, contents, UTF8N);
     }
 
     // (?<!) Zero-width negative lookbehind assertion.
