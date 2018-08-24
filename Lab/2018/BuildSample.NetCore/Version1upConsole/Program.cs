@@ -20,8 +20,23 @@ public static class Program
         throw new NotImplementedException();
     }
 
+    // (?<!) Zero-width negative lookbehind assertion.
+    // (?<=) Zero-width positive lookbehind assertion.
+    static readonly Regex BuildNumberPattern = new Regex(@"(?<=<(Assembly)?(File)?Version>\d+\.\d+\.)\d+");
+
     internal static string IncrementForLine(string line)
     {
-        throw new NotImplementedException();
+        var newLine = BuildNumberPattern.Replace(line, m => IncrementNumber(m.Value));
+        if (newLine != line)
+        {
+            Console.WriteLine("<< {0}", line);
+            Console.WriteLine(">> {0}", newLine);
+        }
+        return newLine;
+    }
+
+    static string IncrementNumber(string i)
+    {
+        return (int.Parse(i) + 1).ToString();
     }
 }
