@@ -26,7 +26,7 @@ public static class ZipHelper
             .InnerText;
 
         var binDirPath = Path.Combine(projDirPath, outputPath);
-        var version = GetAssemblyFileVersion(assemblyInfoFilePath);
+        var version = GetVersion(assemblyInfoFilePath);
         var outputZipFileName = string.Format("{0}-{1}.zip", assemblyName, version);
 
         Console.WriteLine("Zipping: {0} >> {1}", binDirPath, Path.Combine(outputDirPath, outputZipFileName));
@@ -47,9 +47,9 @@ public static class ZipHelper
     // (?<=) Zero-width positive lookbehind assertion.
     // (?!)  Zero-width negative lookahead assertion.
     // (?=)  Zero-width positive lookahead assertion.
-    internal static string GetAssemblyFileVersion(string assemblyInfoFilePath)
+    internal static string GetVersion(string projFilePath)
     {
-        var contents = File.ReadAllText(assemblyInfoFilePath, Encoding.UTF8);
+        var contents = File.ReadAllText(projFilePath, Encoding.UTF8);
         var match = Regex.Match(contents, @"(?<!^\s*//.*)(?<=AssemblyFileVersion\("").+?(?=""\))", RegexOptions.Multiline);
         return match.Value;
     }

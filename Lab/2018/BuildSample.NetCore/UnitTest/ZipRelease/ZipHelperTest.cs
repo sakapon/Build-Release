@@ -8,26 +8,26 @@ namespace UnitTest.ZipRelease
     public class ZipHelperTest
     {
         [TestMethod]
-        public void GetAssemblyFileVersion_1()
+        public void GetVersion_1()
         {
-            var Test = CreateAssertion<string, string>(ZipHelper.GetAssemblyFileVersion);
+            var Test = CreateAssertion<string, string>(ZipHelper.GetVersion);
 
             Test(
-                @"..\..\Properties\AssemblyInfo.cs",
-                "1.0.0");
+                @"..\..\..\UnitTest.csproj",
+                "1.2.3-beta");
         }
 
         [TestMethod]
         public void CreateZipFile_1()
         {
-            ZipHelper.CreateZipFile(@"..\Release", @"..\zip", "CreateZipFile_1.zip");
+            ZipHelper.CreateZipFile(@"..\..\Release", @"..\zip", "CreateZipFile_1.zip");
             Assert.Inconclusive("See the file.");
         }
 
         [TestMethod]
         public void CreateZipFile_2()
         {
-            ZipHelper.CreateZipFile(@"..\Release", ".", "CreateZipFile_2.zip");
+            ZipHelper.CreateZipFile(@"..\..\Release", ".", "CreateZipFile_2.zip");
             Assert.Inconclusive("See the file.");
         }
 
