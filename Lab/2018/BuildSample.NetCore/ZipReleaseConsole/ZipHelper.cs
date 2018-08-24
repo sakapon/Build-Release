@@ -18,8 +18,8 @@ public static class ZipHelper
         var projXml = new XmlDocument();
         projXml.Load(projFilePath);
 
-        var assemblyName = projXml.DocumentElement.SelectSingleNode("./PropertyGroup/AssemblyName").InnerText;
-        var version = projXml.DocumentElement.SelectSingleNode("./PropertyGroup/Version").InnerText;
+        var assemblyName = GetNodeValue(projXml, "./PropertyGroup/AssemblyName");
+        var version = GetNodeValue(projXml, "./PropertyGroup/Version");
         var outputZipFileName = string.Format("{0}-{1}.zip", assemblyName, version);
 
         Console.WriteLine("Zipping: {0} >> {1}", binDirPath, Path.Combine(outputDirPath, outputZipFileName));
@@ -34,15 +34,9 @@ public static class ZipHelper
             .Single();
     }
 
-    // (?<!) Zero-width negative lookbehind assertion.
-    // (?<=) Zero-width positive lookbehind assertion.
-    // (?!)  Zero-width negative lookahead assertion.
-    // (?=)  Zero-width positive lookahead assertion.
-    internal static string GetVersion(string projFilePath)
+    static string GetNodeValue(XmlDocument xml, string xpath)
     {
-        var contents = File.ReadAllText(projFilePath, Encoding.UTF8);
-        var match = Regex.Match(contents, @"(?<=<Version>).+?(?=</Version>)", RegexOptions.Multiline);
-        return match.Value;
+        return xml.DocumentElement.SelectSingleNode(xpath).InnerText;
     }
 
     public static void CreateZipFile(string inputDirPath, string outputDirPath, string outputZipFileName)

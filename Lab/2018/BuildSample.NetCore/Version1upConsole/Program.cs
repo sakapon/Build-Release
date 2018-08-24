@@ -12,13 +12,13 @@ public static class Program
         // args[0]: The target directory path (optional).
         var dirPath = args.Length > 0 ? args[0] : ".";
 
-        foreach (var filePath in GetProjFilePath(dirPath))
+        foreach (var filePath in GetProjFilePaths(dirPath))
             IncrementForFile(filePath);
 
         return 0;
     }
 
-    static IEnumerable<string> GetProjFilePath(string dirPath)
+    static IEnumerable<string> GetProjFilePaths(string dirPath)
     {
         return Directory.EnumerateFiles(dirPath, "*.csproj", SearchOption.AllDirectories)
             .Concat(Directory.EnumerateFiles(dirPath, "*.vbproj", SearchOption.AllDirectories))

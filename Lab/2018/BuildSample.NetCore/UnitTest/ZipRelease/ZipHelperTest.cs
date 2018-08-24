@@ -15,16 +15,6 @@ namespace UnitTest.ZipRelease
         }
 
         [TestMethod]
-        public void GetVersion_1()
-        {
-            var Test = CreateAssertion<string, string>(ZipHelper.GetVersion);
-
-            Test(
-                @"..\..\..\UnitTest.csproj",
-                "1.2.3-beta");
-        }
-
-        [TestMethod]
         public void CreateZipFile_1()
         {
             ZipHelper.CreateZipFile(@"..\..\Release", @"..\zip", "CreateZipFile_1.zip");
