@@ -20,7 +20,9 @@ public static class Program
 
     static IEnumerable<string> GetProjFilePath(string dirPath)
     {
-        return Directory.EnumerateFiles(dirPath, "*.csproj", SearchOption.AllDirectories);
+        return Directory.EnumerateFiles(dirPath, "*.csproj", SearchOption.AllDirectories)
+            .Concat(Directory.EnumerateFiles(dirPath, "*.vbproj", SearchOption.AllDirectories))
+            .Concat(Directory.EnumerateFiles(dirPath, "*.fsproj", SearchOption.AllDirectories));
     }
 
     static readonly Encoding UTF8N = new UTF8Encoding();
