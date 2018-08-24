@@ -8,6 +8,13 @@ namespace UnitTest.ZipRelease
     public class ZipHelperTest
     {
         [TestMethod]
+        public void CreateZipFileForAssembly_1()
+        {
+            ZipHelper.CreateZipFileForAssembly(@"..\..\..\..\ZipReleaseConsole");
+            Assert.Inconclusive("See the file.");
+        }
+
+        [TestMethod]
         public void GetVersion_1()
         {
             var Test = CreateAssertion<string, string>(ZipHelper.GetVersion);
