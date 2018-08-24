@@ -12,21 +12,14 @@ public static class ZipHelper
     public static void CreateZipFileForAssembly(string projDirPath = ".", string outputDirPath = "zip")
     {
         var projFilePath = GetProjFilePath(projDirPath);
-        var assemblyInfoFilePath = GetAssemblyInfoFilePath(projDirPath);
+        var outputPath = @"bin\Release";
+        var binDirPath = Path.Combine(projDirPath, outputPath);
 
         var projXml = new XmlDocument();
         projXml.Load(projFilePath);
-        var nsm = new XmlNamespaceManager(projXml.NameTable);
-        nsm.AddNamespace("p", "http://schemas.microsoft.com/developer/msbuild/2003");
 
-        var assemblyName = projXml.DocumentElement.SelectSingleNode("./p:PropertyGroup/p:AssemblyName", nsm).InnerText;
-        var outputPath = projXml.DocumentElement.SelectNodes("./p:PropertyGroup/p:OutputPath", nsm)
-            .OfType<XmlElement>()
-            .Single(xe => xe.ParentNode.Attributes["Condition"].Value.Contains("Release"))
-            .InnerText;
-
-        var binDirPath = Path.Combine(projDirPath, outputPath);
-        var version = GetVersion(assemblyInfoFilePath);
+        var assemblyName = projXml.DocumentElement.SelectSingleNode("./PropertyGroup/AssemblyName").InnerText;
+        var version = projXml.DocumentElement.SelectSingleNode("./PropertyGroup/Version").InnerText;
         var outputZipFileName = string.Format("{0}-{1}.zip", assemblyName, version);
 
         Console.WriteLine("Zipping: {0} >> {1}", binDirPath, Path.Combine(outputDirPath, outputZipFileName));
@@ -35,12 +28,10 @@ public static class ZipHelper
 
     static string GetProjFilePath(string dirPath)
     {
-        return Directory.EnumerateFiles(dirPath, "*.csproj", SearchOption.AllDirectories).Single();
-    }
-
-    static string GetAssemblyInfoFilePath(string dirPath)
-    {
-        return Directory.EnumerateFiles(dirPath, "AssemblyInfo.cs", SearchOption.AllDirectories).Single();
+        return Directory.EnumerateFiles(dirPath, "*.csproj", SearchOption.AllDirectories)
+            .Concat(Directory.EnumerateFiles(dirPath, "*.vbproj", SearchOption.AllDirectories))
+            .Concat(Directory.EnumerateFiles(dirPath, "*.fsproj", SearchOption.AllDirectories))
+            .Single();
     }
 
     // (?<!) Zero-width negative lookbehind assertion.
