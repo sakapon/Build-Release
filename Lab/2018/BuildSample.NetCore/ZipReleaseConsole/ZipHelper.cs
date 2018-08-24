@@ -50,7 +50,7 @@ public static class ZipHelper
     internal static string GetVersion(string projFilePath)
     {
         var contents = File.ReadAllText(projFilePath, Encoding.UTF8);
-        var match = Regex.Match(contents, @"(?<!^\s*//.*)(?<=AssemblyFileVersion\("").+?(?=""\))", RegexOptions.Multiline);
+        var match = Regex.Match(contents, @"(?<=<Version>).+?(?=</Version>)", RegexOptions.Multiline);
         return match.Value;
     }
 
