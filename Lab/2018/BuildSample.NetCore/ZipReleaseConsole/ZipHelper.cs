@@ -3,8 +3,6 @@ using System.Collections.Generic;
 using System.IO;
 using System.IO.Compression;
 using System.Linq;
-using System.Text;
-using System.Text.RegularExpressions;
 using System.Xml;
 
 public static class ZipHelper
@@ -18,8 +16,8 @@ public static class ZipHelper
         var projXml = new XmlDocument();
         projXml.Load(projFilePath);
 
-        var assemblyName = GetNodeValue(projXml, "./PropertyGroup/AssemblyName");
-        var version = GetNodeValue(projXml, "./PropertyGroup/Version");
+        var assemblyName = GetNodeValue(projXml, "./PropertyGroup/AssemblyName", Path.GetFileNameWithoutExtension(projFilePath));
+        var version = GetNodeValue(projXml, "./PropertyGroup/Version", "1.0.0");
         var outputZipFileName = string.Format("{0}-{1}.zip", assemblyName, version);
 
         Console.WriteLine("Zipping: {0} >> {1}", binDirPath, Path.Combine(outputDirPath, outputZipFileName));
@@ -34,9 +32,10 @@ public static class ZipHelper
             .Single();
     }
 
-    static string GetNodeValue(XmlDocument xml, string xpath)
+    static string GetNodeValue(XmlDocument xml, string xpath, string defaultValue)
     {
-        return xml.DocumentElement.SelectSingleNode(xpath).InnerText;
+        var node = xml.DocumentElement.SelectSingleNode(xpath);
+        return node != null ? node.InnerText : defaultValue;
     }
 
     public static void CreateZipFile(string inputDirPath, string outputDirPath, string outputZipFileName)
