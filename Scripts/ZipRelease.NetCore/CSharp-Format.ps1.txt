@@ -1,0 +1,23 @@
+﻿$references = @("System.IO.Compression.FileSystem", "System.Xml")
+$source = @"
+{0}"@
+Add-Type -TypeDefinition $source -Language CSharp -ReferencedAssemblies $references
+
+
+$scriptDir = Split-Path $MyInvocation.MyCommand.Path -Parent
+$versionIncrementPath = Join-Path $scriptDir KTools.VersionIncrement.ps1 -Resolve
+echo $versionIncrementPath
+. $versionIncrementPath
+
+$msbuildPath = [ZipHelper]::GetMSBuildPath()
+if (-not ($msbuildPath)) {{ exit 100 }}
+
+# Sets the alias of MSBuild.exe.
+echo $msbuildPath
+sal msbuild $msbuildPath
+
+msbuild /p:Configuration=Release /t:Clean
+msbuild /p:Configuration=Release /t:Rebuild
+if ($LASTEXITCODE -ne 0) {{ exit 101 }}
+
+[ZipHelper]::CreateZipFileForAssembly()
