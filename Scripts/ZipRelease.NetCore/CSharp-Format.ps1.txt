@@ -5,19 +5,15 @@ Add-Type -TypeDefinition $source -Language CSharp -ReferencedAssemblies $referen
 
 
 $scriptDir = Split-Path $MyInvocation.MyCommand.Path -Parent
-$versionIncrementPath = Join-Path $scriptDir KTools.VersionIncrement.ps1 -Resolve
-echo $versionIncrementPath
-. $versionIncrementPath
+$version1upPath = Join-Path $scriptDir KTools.Version1up.NetCore.ps1 -Resolve
+echo $version1upPath
+. $version1upPath
 
-$msbuildPath = [ZipHelper]::GetMSBuildPath()
-if (-not ($msbuildPath)) {{ exit 100 }}
-
-# Sets the alias of MSBuild.exe.
-echo $msbuildPath
-sal msbuild $msbuildPath
-
-msbuild /p:Configuration=Release /t:Clean
-msbuild /p:Configuration=Release /t:Rebuild
+dotnet clean -c Release
+[ZipHelper]::GetTargetFrameworks() | % {{
+    $_
+    dotnet publish -c Release -f $_ -o bin\publish\$_
+}}
 if ($LASTEXITCODE -ne 0) {{ exit 101 }}
 
 [ZipHelper]::CreateZipFileForAssembly()

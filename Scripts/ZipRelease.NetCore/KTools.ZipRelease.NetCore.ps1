@@ -1,4 +1,6 @@
-﻿using System;
+﻿$references = @("System.IO.Compression.FileSystem", "System.Xml")
+$source = @"
+using System;
 using System.Collections.Generic;
 using System.IO;
 using System.IO.Compression;
@@ -65,3 +67,20 @@ public static class ZipHelper
         ZipFile.CreateFromDirectory(inputDirPath, outputZipFilePath);
     }
 }
+"@
+Add-Type -TypeDefinition $source -Language CSharp -ReferencedAssemblies $references
+
+
+$scriptDir = Split-Path $MyInvocation.MyCommand.Path -Parent
+$version1upPath = Join-Path $scriptDir KTools.Version1up.NetCore.ps1 -Resolve
+echo $version1upPath
+. $version1upPath
+
+dotnet clean -c Release
+[ZipHelper]::GetTargetFrameworks() | % {
+    $_
+    dotnet publish -c Release -f $_ -o bin\publish\$_
+}
+if ($LASTEXITCODE -ne 0) { exit 101 }
+
+[ZipHelper]::CreateZipFileForAssembly()

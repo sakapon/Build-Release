@@ -1,8 +1,8 @@
 <?xml version="1.0"?>
 <package>
   <metadata>
-    <id>KTools.ZipRelease</id>
-    <version>1.2.6</version>
+    <id>KTools.ZipRelease.NetCore</id>
+    <version>2.0.8</version>
     <title>Zip Release</title>
     <authors>Keiho Sakapon</authors>
     <owners>Keiho Sakapon</owners>
@@ -10,14 +10,14 @@
     <projectUrl>https://github.com/sakapon/Build-Release</projectUrl>
     <requireLicenseAcceptance>false</requireLicenseAcceptance>
     <description>The PowerShell script to build the project and create a ZIP file.</description>
-    <releaseNotes>Find the path to KTools.VersionIncrement.ps1, regardless of the current directory.</releaseNotes>
+    <releaseNotes>For .NET Core.</releaseNotes>
     <copyright>© 2018 Keiho Sakapon</copyright>
     <tags>Build Release ZIP MSBuild PowerShell</tags>
     <dependencies>
-      <dependency id="KTools.VersionIncrement" version="[1.2.6]" />
+      <dependency id="KTools.Version1up.NetCore" version="[2.0.8]" />
     </dependencies>
   </metadata>
   <files>
-    <file src="KTools.ZipRelease.ps1" target="content" />
+    <file src="KTools.ZipRelease.NetCore.ps1" target="content" />
   </files>
 </package>
