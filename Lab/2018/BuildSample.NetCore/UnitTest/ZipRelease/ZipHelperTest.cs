@@ -15,6 +15,16 @@ namespace UnitTest.ZipRelease
         }
 
         [TestMethod]
+        public void GetTargetFrameworks_1()
+        {
+            var Test = CreateCollectionAssertion<string, string>(ZipHelper.GetTargetFrameworks);
+
+            Test(
+                @"..\..\..",
+                new[] { "net45" });
+        }
+
+        [TestMethod]
         public void CreateZipFile_1()
         {
             ZipHelper.CreateZipFile(@"..\..\Release", @"..\zip", "CreateZipFile_1.zip");

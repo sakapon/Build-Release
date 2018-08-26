@@ -3,10 +3,29 @@ using System.Collections.Generic;
 using System.IO;
 using System.IO.Compression;
 using System.Linq;
+using System.Text;
+using System.Text.RegularExpressions;
 using System.Xml;
 
 public static class ZipHelper
 {
+    public static string[] GetTargetFrameworks(string projDirPath = ".")
+    {
+        var projFilePath = GetProjFilePath(projDirPath);
+        return GetTargetFrameworksForFile(projFilePath);
+    }
+
+    // (?<!) Zero-width negative lookbehind assertion.
+    // (?<=) Zero-width positive lookbehind assertion.
+    // (?!)  Zero-width negative lookahead assertion.
+    // (?=)  Zero-width positive lookahead assertion.
+    static string[] GetTargetFrameworksForFile(string projFilePath)
+    {
+        var contents = File.ReadAllText(projFilePath, Encoding.UTF8);
+        var match = Regex.Match(contents, @"(?<=<TargetFrameworks?>).+?(?=</TargetFrameworks?>)", RegexOptions.Multiline);
+        return match.Value.Split(';');
+    }
+
     public static void CreateZipFileForAssembly(string projDirPath = ".", string outputDirPath = "zip")
     {
         var projFilePath = GetProjFilePath(projDirPath);
