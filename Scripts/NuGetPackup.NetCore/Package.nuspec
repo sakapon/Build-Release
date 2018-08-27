@@ -1,23 +1,23 @@
 <?xml version="1.0"?>
 <package>
   <metadata>
-    <id>KTools.ZipRelease.NetCore</id>
+    <id>KTools.NuGetPackup.NetCore</id>
     <version>2.0.10</version>
-    <title>Zip Release</title>
+    <title>NuGet Packup</title>
     <authors>Keiho Sakapon</authors>
     <owners>Keiho Sakapon</owners>
     <licenseUrl>https://github.com/sakapon/Build-Release/blob/master/LICENSE</licenseUrl>
     <projectUrl>https://github.com/sakapon/Build-Release</projectUrl>
     <requireLicenseAcceptance>false</requireLicenseAcceptance>
-    <description>The PowerShell script to build the project and create a ZIP file.</description>
+    <description>The PowerShell script to create a NuGet package for the project.</description>
     <releaseNotes>For .NET Core.</releaseNotes>
     <copyright>© 2018 Keiho Sakapon</copyright>
-    <tags>Build Release ZIP MSBuild PowerShell</tags>
+    <tags>Build Release NuGet Package PowerShell</tags>
     <dependencies>
       <dependency id="KTools.Version1up.NetCore" version="[2.0.10]" />
     </dependencies>
   </metadata>
   <files>
-    <file src="KTools.ZipRelease.NetCore.ps1" target="content" />
+    <file src="KTools.NuGetPackup.NetCore.ps1" target="content" />
   </files>
 </package>
