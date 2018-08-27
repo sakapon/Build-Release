@@ -1,9 +1,9 @@
 <?xml version="1.0"?>
 <package>
   <metadata>
-    <id>KTools.VersionIncrement</id>
-    <version>1.2.6</version>
-    <title>Version Increment</title>
+    <id>KTools.Version1up</id>
+    <version>2.0.10</version>
+    <title>Version 1up</title>
     <authors>Keiho Sakapon</authors>
     <owners>Keiho Sakapon</owners>
     <licenseUrl>https://github.com/sakapon/Build-Release/blob/master/LICENSE</licenseUrl>
@@ -15,6 +15,6 @@
     <tags>Build Release Version Increment Assembly AssemblyInfo PowerShell</tags>
   </metadata>
   <files>
-    <file src="KTools.VersionIncrement.ps1" target="content" />
+    <file src="KTools.Version1up.ps1" target="content" />
   </files>
 </package>
