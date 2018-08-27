@@ -22,6 +22,9 @@ namespace UnitTest.ZipRelease
             Test(
                 @"..\..\..",
                 new[] { "net45" });
+            Test(
+                @"..\..\..\..\..\BuildSample\ZipReleaseConsole",
+                new string[0]);
         }
 
         [TestMethod]

@@ -23,6 +23,7 @@ public static class ZipHelper
     {
         var contents = File.ReadAllText(projFilePath, Encoding.UTF8);
         var match = Regex.Match(contents, @"(?<=<TargetFrameworks?>).+?(?=</TargetFrameworks?>)", RegexOptions.Multiline);
+        if (string.IsNullOrWhiteSpace(match.Value)) return new string[0];
         return match.Value.Split(';');
     }
 
@@ -31,6 +32,11 @@ public static class ZipHelper
         var projFilePath = GetProjFilePath(projDirPath);
         var outputPath = @"bin\publish";
         var binDirPath = Path.Combine(projDirPath, outputPath);
+        if (!Directory.Exists(binDirPath))
+        {
+            Console.WriteLine("{0} is not found.", binDirPath);
+            return;
+        }
 
         var projXml = new XmlDocument();
         projXml.Load(projFilePath);

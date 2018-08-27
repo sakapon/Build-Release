@@ -25,6 +25,7 @@ public static class ZipHelper
     {
         var contents = File.ReadAllText(projFilePath, Encoding.UTF8);
         var match = Regex.Match(contents, @"(?<=<TargetFrameworks?>).+?(?=</TargetFrameworks?>)", RegexOptions.Multiline);
+        if (string.IsNullOrWhiteSpace(match.Value)) return new string[0];
         return match.Value.Split(';');
     }
 
@@ -33,6 +34,11 @@ public static class ZipHelper
         var projFilePath = GetProjFilePath(projDirPath);
         var outputPath = @"bin\publish";
         var binDirPath = Path.Combine(projDirPath, outputPath);
+        if (!Directory.Exists(binDirPath))
+        {
+            Console.WriteLine("{0} is not found.", binDirPath);
+            return;
+        }
 
         var projXml = new XmlDocument();
         projXml.Load(projFilePath);
@@ -73,14 +79,19 @@ Add-Type -TypeDefinition $source -Language CSharp -ReferencedAssemblies $referen
 
 $scriptDir = Split-Path $MyInvocation.MyCommand.Path -Parent
 $version1upPath = Join-Path $scriptDir KTools.Version1up.NetCore.ps1 -Resolve
-echo $version1upPath
+if (-not $version1upPath) { exit 100 }
+$version1upPath
 . $version1upPath
 
 dotnet clean -c Release
+if ($LASTEXITCODE -ne 0) { exit 101 }
+
 [ZipHelper]::GetTargetFrameworks() | % {
     $_
     dotnet publish -c Release -f $_ -o bin\publish\$_
+    if ($LASTEXITCODE -ne 0) { exit 102 }
 }
-if ($LASTEXITCODE -ne 0) { exit 101 }
+if ($LASTEXITCODE -ne 0) { exit 103 }
 
 [ZipHelper]::CreateZipFileForAssembly()
+if ($LASTEXITCODE -ne 0) { exit 104 }
