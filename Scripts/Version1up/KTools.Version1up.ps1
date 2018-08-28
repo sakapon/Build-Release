@@ -35,7 +35,7 @@ public static class Program
 
     // (?<!) Zero-width negative lookbehind assertion.
     // (?<=) Zero-width positive lookbehind assertion.
-    static readonly Regex BuildNumberPattern = new Regex(@"(?<!^\s*//.*)(?<=Assembly(File)?Version\(""\d+\.\d+\.)\d+");
+    static readonly Regex BuildNumberPattern = new Regex(@"(?<!^\s*//.*)(?<=Assembly(File)?(Informational)?Version\(""\d+\.\d+\.)\d+");
 
     internal static string IncrementForLine(string line)
     {

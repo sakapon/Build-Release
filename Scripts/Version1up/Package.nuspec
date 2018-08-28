@@ -10,7 +10,7 @@
     <projectUrl>https://github.com/sakapon/Build-Release</projectUrl>
     <requireLicenseAcceptance>false</requireLicenseAcceptance>
     <description>The PowerShell script to increment the assembly version on AssemblyInfo.</description>
-    <releaseNotes>Write log to the console.</releaseNotes>
+    <releaseNotes>Support AssemblyInformationalVersion attribute.</releaseNotes>
     <copyright>© 2018 Keiho Sakapon</copyright>
     <tags>Build Release Version Increment Assembly AssemblyInfo PowerShell</tags>
   </metadata>
