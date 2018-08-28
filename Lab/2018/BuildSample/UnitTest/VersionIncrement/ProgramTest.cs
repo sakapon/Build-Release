@@ -29,6 +29,9 @@ namespace UnitTest.VersionIncrement
                 "[assembly: AssemblyFileVersion(\"1.23.456-beta\")]",
                 "[assembly: AssemblyFileVersion(\"1.23.457-beta\")]");
             Test(
+                "[assembly: AssemblyInformationalVersion(\"12.34.0\")]",
+                "[assembly: AssemblyInformationalVersion(\"12.34.1\")]");
+            Test(
                 "// [assembly: AssemblyVersion(\"1.0.0.0\")]",
                 "// [assembly: AssemblyVersion(\"1.0.0.0\")]");
             Test(
