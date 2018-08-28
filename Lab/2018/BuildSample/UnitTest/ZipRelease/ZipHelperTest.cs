@@ -24,13 +24,20 @@ namespace UnitTest.ZipRelease
         }
 
         [TestMethod]
+        public void CreateZipFileForAssembly_1()
+        {
+            ZipHelper.CreateZipFileForAssembly(@"..\..\..\ZipReleaseConsole");
+            Assert.Inconclusive("See the file.");
+        }
+
+        [TestMethod]
         public void GetAssemblyFileVersion_1()
         {
             var Test = CreateAssertion<string, string>(ZipHelper.GetAssemblyFileVersion);
 
             Test(
                 @"..\..\Properties\AssemblyInfo.cs",
-                "1.0.0");
+                "2.2.3");
         }
 
         [TestMethod]
