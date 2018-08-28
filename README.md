@@ -1,5 +1,5 @@
 # Build Release
-A set of tools to build a Visual Studio project.
+A set of tools to build a .NET project.
 
 [![license](https://img.shields.io/github/license/sakapon/Build-Release.svg)](https://github.com/sakapon/Build-Release/blob/master/LICENSE)
 
@@ -8,7 +8,7 @@ The following tools are contained:
 - [Zip Release](#zip-release)
 
 There are options to use the tools:
-- Add the PowerShell script files to Visual Studio projects by NuGet
+- Add the PowerShell script files to a .NET project by NuGet
 - Download [the PowerShell script files](https://github.com/sakapon/Build-Release/tree/master/Downloads) and extract them to any folder
 - Add the PowerShell scripts above to `External Tools` in Visual Studio (recommended)
 
@@ -39,7 +39,7 @@ The PowerShell script to build the project and create a ZIP file.
 
 ## Usage
 There are options to use the tools:
-- Add the PowerShell script files to Visual Studio projects by NuGet
+- Add the PowerShell script files to a .NET project by NuGet
   - Execute the scripts on the project folder
 - Download the latest version of [the PowerShell script files](https://github.com/sakapon/Build-Release/tree/master/Downloads) and extract them to any folder
   - Execute the scripts on the project folder
