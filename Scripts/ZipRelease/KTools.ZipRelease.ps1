@@ -48,6 +48,11 @@ public static class ZipHelper
     {
         var projFilePath = GetProjFilePath(projDirPath);
         var assemblyInfoFilePath = GetAssemblyInfoFilePath(projDirPath);
+        if (assemblyInfoFilePath == null)
+        {
+            Console.WriteLine("AssemblyInfo.cs is not found.");
+            return;
+        }
 
         var projXml = new XmlDocument();
         projXml.Load(projFilePath);
@@ -75,7 +80,7 @@ public static class ZipHelper
 
     static string GetAssemblyInfoFilePath(string dirPath)
     {
-        return Directory.EnumerateFiles(dirPath, "AssemblyInfo.cs", SearchOption.AllDirectories).Single();
+        return Directory.EnumerateFiles(dirPath, "AssemblyInfo.cs", SearchOption.AllDirectories).SingleOrDefault();
     }
 
     // (?<!) Zero-width negative lookbehind assertion.
@@ -102,19 +107,22 @@ Add-Type -TypeDefinition $source -Language CSharp -ReferencedAssemblies $referen
 
 
 $scriptDir = Split-Path $MyInvocation.MyCommand.Path -Parent
-$versionIncrementPath = Join-Path $scriptDir KTools.VersionIncrement.ps1 -Resolve
-echo $versionIncrementPath
-. $versionIncrementPath
+$version1upPath = Join-Path $scriptDir KTools.Version1up.ps1 -Resolve
+if (-not $version1upPath) { exit 100 }
+$version1upPath
+. $version1upPath
 
 $msbuildPath = [ZipHelper]::GetMSBuildPath()
-if (-not ($msbuildPath)) { exit 100 }
+if (-not $msbuildPath) { exit 101 }
 
 # Sets the alias of MSBuild.exe.
-echo $msbuildPath
+$msbuildPath
 sal msbuild $msbuildPath
 
 msbuild /p:Configuration=Release /t:Clean
+if ($LASTEXITCODE -ne 0) { exit 102 }
 msbuild /p:Configuration=Release /t:Rebuild
-if ($LASTEXITCODE -ne 0) { exit 101 }
+if ($LASTEXITCODE -ne 0) { exit 103 }
 
 [ZipHelper]::CreateZipFileForAssembly()
+if ($LASTEXITCODE -ne 0) { exit 104 }
