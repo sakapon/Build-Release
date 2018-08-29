@@ -3,7 +3,7 @@
   <metadata>
     <id>KTools.ZipRelease.NetCore</id>
     <version>2.0.10</version>
-    <title>Zip Release</title>
+    <title>Zip Release for .NET Core</title>
     <authors>Keiho Sakapon</authors>
     <owners>Keiho Sakapon</owners>
     <licenseUrl>https://github.com/sakapon/Build-Release/blob/master/LICENSE</licenseUrl>
