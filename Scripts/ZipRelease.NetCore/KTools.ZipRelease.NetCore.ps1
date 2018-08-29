@@ -77,6 +77,8 @@ public static class ZipHelper
 Add-Type -TypeDefinition $source -Language CSharp -ReferencedAssemblies $references
 
 
+"Zip Release for .NET Core"
+
 $scriptDir = Split-Path $MyInvocation.MyCommand.Path -Parent
 $version1upPath = Join-Path $scriptDir KTools.Version1up.NetCore.ps1 -Resolve
 if (-not $version1upPath) { exit 100 }
@@ -95,3 +97,5 @@ if ($LASTEXITCODE -ne 0) { exit 103 }
 
 [ZipHelper]::CreateZipFileForAssembly()
 if ($LASTEXITCODE -ne 0) { exit 104 }
+
+"Zip Release: Completed"
