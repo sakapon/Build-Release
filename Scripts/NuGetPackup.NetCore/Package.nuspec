@@ -9,7 +9,7 @@
     <licenseUrl>https://github.com/sakapon/Build-Release/blob/master/LICENSE</licenseUrl>
     <projectUrl>https://github.com/sakapon/Build-Release</projectUrl>
     <requireLicenseAcceptance>false</requireLicenseAcceptance>
-    <description>The PowerShell script to create a NuGet package for the project.</description>
+    <description>The PowerShell script to create a NuGet package for the project. Ensure the Version element in the project file before run.</description>
     <releaseNotes>For .NET Core.</releaseNotes>
     <copyright>© 2018 Keiho Sakapon</copyright>
     <tags>Build Release NuGet Package PowerShell</tags>

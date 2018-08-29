@@ -9,7 +9,7 @@
     <licenseUrl>https://github.com/sakapon/Build-Release/blob/master/LICENSE</licenseUrl>
     <projectUrl>https://github.com/sakapon/Build-Release</projectUrl>
     <requireLicenseAcceptance>false</requireLicenseAcceptance>
-    <description>The PowerShell script to increment the assembly version on project files.</description>
+    <description>The PowerShell script to increment the assembly version in project files. Ensure the Version element before run.</description>
     <releaseNotes>For .NET Core.</releaseNotes>
     <copyright>© 2018 Keiho Sakapon</copyright>
     <tags>Build Release Version Increment Assembly Project PowerShell</tags>
