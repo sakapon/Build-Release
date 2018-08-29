@@ -19,15 +19,16 @@ There are options to use the tools:
 See [Usage](#usage) for details.
 
 ## Version 1up
-The PowerShell script to increment the assembly version in AssemblyInfo.
+The PowerShell script to increment the assembly version.
 
 [![NuGet](https://img.shields.io/nuget/v/KTools.Version1up.svg)](https://www.nuget.org/packages/KTools.Version1up/)
 [![NuGet](https://img.shields.io/nuget/dt/KTools.Version1up.svg)](https://www.nuget.org/packages/KTools.Version1up/)  
 [NuGet Gallery | KTools.Version1up](https://www.nuget.org/packages/KTools.Version1up/)
 
 ### Specification
-- Increment the assembly version on AssemblyInfo.cs
-  - build number (`z` of `x.y.z`)
+- Increment the build number of the assembly version (`z` of `x.y.z`)
+  - AssemblyInfo.cs for .NET Framework
+  - Project files for .NET Core
 
 ## Zip Release
 The PowerShell script to build the project and create a ZIP file.
