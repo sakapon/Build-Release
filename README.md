@@ -5,8 +5,11 @@ A set of tools to build a .NET project.
 
 The following tools are contained:
 - [Version 1up](#version-1up)
+  - For the .NET Framework project format and the .NET Core project format
 - [Zip Release](#zip-release)
+  - For the .NET Framework project format and the .NET Core project format
 - [NuGet Packup](#nuget-packup)
+  - For the .NET Core project format
 
 There are options to use the tools:
 - Add the PowerShell script files to a .NET project by NuGet
@@ -18,9 +21,9 @@ See [Usage](#usage) for details.
 ## Version 1up
 The PowerShell script to increment the assembly version in AssemblyInfo.
 
-[![NuGet](https://img.shields.io/nuget/v/KTools.VersionIncrement.svg)](https://www.nuget.org/packages/KTools.VersionIncrement/)
-[![NuGet](https://img.shields.io/nuget/dt/KTools.VersionIncrement.svg)](https://www.nuget.org/packages/KTools.VersionIncrement/)  
-[NuGet Gallery | KTools.VersionIncrement](https://www.nuget.org/packages/KTools.VersionIncrement/)
+[![NuGet](https://img.shields.io/nuget/v/KTools.Version1up.svg)](https://www.nuget.org/packages/KTools.Version1up/)
+[![NuGet](https://img.shields.io/nuget/dt/KTools.Version1up.svg)](https://www.nuget.org/packages/KTools.Version1up/)  
+[NuGet Gallery | KTools.Version1up](https://www.nuget.org/packages/KTools.Version1up/)
 
 ### Specification
 - Increment the assembly version on AssemblyInfo.cs
@@ -39,7 +42,7 @@ The PowerShell script to build the project and create a ZIP file.
 - Create a ZIP file from the build result
 
 ## NuGet Packup
-T.B.D.
+The PowerShell script to create a NuGet package for the project.
 
 ## Usage
 There are options to use the tools:
