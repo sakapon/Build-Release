@@ -4,8 +4,9 @@ A set of tools to build a .NET project.
 [![license](https://img.shields.io/github/license/sakapon/Build-Release.svg)](https://github.com/sakapon/Build-Release/blob/master/LICENSE)
 
 The following tools are contained:
-- [Version Increment](#version-increment)
+- [Version 1up](#version-1up)
 - [Zip Release](#zip-release)
+- [NuGet Packup](#nuget-packup)
 
 There are options to use the tools:
 - Add the PowerShell script files to a .NET project by NuGet
@@ -14,8 +15,8 @@ There are options to use the tools:
 
 See [Usage](#usage) for details.
 
-## Version Increment
-The PowerShell script to increment the assembly version on AssemblyInfo.
+## Version 1up
+The PowerShell script to increment the assembly version in AssemblyInfo.
 
 [![NuGet](https://img.shields.io/nuget/v/KTools.VersionIncrement.svg)](https://www.nuget.org/packages/KTools.VersionIncrement/)
 [![NuGet](https://img.shields.io/nuget/dt/KTools.VersionIncrement.svg)](https://www.nuget.org/packages/KTools.VersionIncrement/)  
@@ -33,9 +34,12 @@ The PowerShell script to build the project and create a ZIP file.
 [NuGet Gallery | KTools.ZipRelease](https://www.nuget.org/packages/KTools.ZipRelease/)
 
 ### Specification
-- Increment the assembly version (call the [**Version Increment**](#version-increment))
+- Increment the assembly version (call the [**Version 1up**](#version-1up))
 - Build a release by MSBuild
 - Create a ZIP file from the build result
+
+## NuGet Packup
+T.B.D.
 
 ## Usage
 There are options to use the tools:
@@ -59,6 +63,7 @@ Choose the menu `Tools > External Tools`, and add a new content with the followi
 ![ExternalTools](docs/images/ExternalTools.png)
 
 ## Release Notes
+- **v2.0.10** For .NET Core.
 - **v1.2.6** Find the path to .ps1 files, regardless of the current directory.
 - **v1.2.5** Find the path to MSBuild.exe.
 - **v1.2.4** Rename .ps1 files.
