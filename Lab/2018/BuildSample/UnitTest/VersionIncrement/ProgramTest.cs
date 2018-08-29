@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Text;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
 using static UnitTest.TestHelper;
 
@@ -12,6 +13,16 @@ namespace UnitTest.VersionIncrement
         {
             Program.IncrementForFile(@"..\..\Properties\AssemblyInfo.cs");
             Assert.Inconclusive("See the file.");
+        }
+
+        [TestMethod]
+        public void DetectEncoding_1()
+        {
+            var Test = CreateAssertion<string, Encoding>(Program.DetectEncoding);
+
+            Test(
+                @"..\..\TestHelper.cs",
+                Encoding.UTF8);
         }
 
         [TestMethod]

@@ -25,15 +25,28 @@ public static class Program
             .Concat(Directory.EnumerateFiles(dirPath, "*.fsproj", SearchOption.AllDirectories));
     }
 
-    static readonly Encoding UTF8N = new UTF8Encoding();
-
     internal static void IncrementForFile(string filePath)
     {
         Console.WriteLine(filePath);
-        var contents = File.ReadLines(filePath, UTF8N)
+        var encoding = DetectEncoding(filePath);
+        var contents = File.ReadLines(filePath, encoding)
             .Select(IncrementForLine)
             .ToArray();
-        File.WriteAllLines(filePath, contents, UTF8N);
+        File.WriteAllLines(filePath, contents, encoding);
+    }
+
+    internal static readonly Encoding UTF8N = new UTF8Encoding();
+
+    internal static Encoding DetectEncoding(string filePath)
+    {
+        var preamble = Encoding.UTF8.GetPreamble();
+        var headBytes = new byte[preamble.Length];
+
+        using (var stream = File.OpenRead(filePath))
+        {
+            stream.Read(headBytes, 0, headBytes.Length);
+        }
+        return headBytes.SequenceEqual(preamble) ? Encoding.UTF8 : UTF8N;
     }
 
     // (?<!) Zero-width negative lookbehind assertion.
