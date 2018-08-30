@@ -39,11 +39,16 @@ The PowerShell script to build the project and create a ZIP file.
 
 ### Specification
 - Increment the assembly version (call the [**Version 1up**](#version-1up))
-- Build a release by MSBuild
+- Build a release by the MSBuild
 - Create a ZIP file from the build result
 
 ## NuGet Packup
-The PowerShell script to create a NuGet package for the project.
+The PowerShell script to build the project and create a NuGet package.
+
+### Specification
+- Increment the assembly version (call the [**Version 1up**](#version-1up))
+- Build a release by the MSBuild
+- Create a NuGet package from the build result
 
 ## Usage
 There are options to use the tools:
@@ -56,12 +61,12 @@ There are options to use the tools:
 
 You can customize the PowerShell script to meet your needs.
 
-### How to Add the Scripts to `External Tools` in Visual Studio
+### How to Add the Scripts to External Tools in Visual Studio
 Choose the menu `Tools > External Tools`, and add a new content with the following information:
 - Title: any
 - Command: `powershell.exe`
 - Arguments: `-ExecutionPolicy Unrestricted "C:\scripts_folder\KTools.xxx.ps1"`
-- Initial directory: `$(ProjectDir)` or `$(SolutionDir)`
+- Initial directory: `$(ProjectDir)`
 - Use Output window: `On`
 
 ![ExternalTools](docs/images/ExternalTools.png)
