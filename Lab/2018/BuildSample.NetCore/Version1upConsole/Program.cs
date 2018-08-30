@@ -12,15 +12,17 @@ public static class Program
         // args[0]: The target directory path (optional).
         var dirPath = args.Length > 0 ? args[0] : ".";
 
-        foreach (var filePath in GetAssemblyInfoPaths(dirPath))
+        foreach (var filePath in GetProjFilePaths(dirPath))
             IncrementForFile(filePath);
 
         return 0;
     }
 
-    static IEnumerable<string> GetAssemblyInfoPaths(string dirPath)
+    static IEnumerable<string> GetProjFilePaths(string dirPath)
     {
-        return Directory.EnumerateFiles(dirPath, "AssemblyInfo.cs", SearchOption.AllDirectories);
+        return Directory.EnumerateFiles(dirPath, "*.csproj", SearchOption.AllDirectories)
+            .Concat(Directory.EnumerateFiles(dirPath, "*.vbproj", SearchOption.AllDirectories))
+            .Concat(Directory.EnumerateFiles(dirPath, "*.fsproj", SearchOption.AllDirectories));
     }
 
     internal static void IncrementForFile(string filePath)
@@ -49,7 +51,7 @@ public static class Program
 
     // (?<!) Zero-width negative lookbehind assertion.
     // (?<=) Zero-width positive lookbehind assertion.
-    static readonly Regex BuildNumberPattern = new Regex(@"(?<!^\s*//.*)(?<=Assembly(File)?(Informational)?Version\(""\d+\.\d+\.)\d+");
+    static readonly Regex BuildNumberPattern = new Regex(@"(?<=<(Assembly)?(File)?Version>\d+\.\d+\.)\d+");
 
     internal static string IncrementForLine(string line)
     {

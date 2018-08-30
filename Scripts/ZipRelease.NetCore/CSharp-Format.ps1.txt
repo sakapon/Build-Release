@@ -1,0 +1,28 @@
+﻿$references = @("System.IO.Compression.FileSystem", "System.Xml")
+$source = @"
+{0}"@
+Add-Type -TypeDefinition $source -Language CSharp -ReferencedAssemblies $references
+
+
+"Zip Release for .NET Core"
+
+$scriptDir = Split-Path $MyInvocation.MyCommand.Path -Parent
+$version1upPath = Join-Path $scriptDir KTools.Version1up.NetCore.ps1 -Resolve
+if (-not $version1upPath) {{ exit 100 }}
+$version1upPath
+. $version1upPath
+
+dotnet clean -c Release
+if ($LASTEXITCODE -ne 0) {{ exit 101 }}
+
+[ZipHelper]::GetTargetFrameworks() | % {{
+    $_
+    dotnet publish -c Release -f $_ -o bin\publish\$_
+    if ($LASTEXITCODE -ne 0) {{ exit 102 }}
+}}
+if ($LASTEXITCODE -ne 0) {{ exit 103 }}
+
+[ZipHelper]::CreateZipFileForAssembly()
+if ($LASTEXITCODE -ne 0) {{ exit 104 }}
+
+"Zip Release: Completed"

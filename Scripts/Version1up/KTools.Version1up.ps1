@@ -1,4 +1,5 @@
-﻿using System;
+﻿$source = @"
+using System;
 using System.Collections.Generic;
 using System.IO;
 using System.Linq;
@@ -67,3 +68,7 @@ public static class Program
         return (int.Parse(i) + 1).ToString();
     }
 }
+"@
+
+Add-Type -TypeDefinition $source -Language CSharp
+exit [Program]::Main($Args)

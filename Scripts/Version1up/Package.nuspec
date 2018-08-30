@@ -1,20 +1,20 @@
 <?xml version="1.0"?>
 <package>
   <metadata>
-    <id>KTools.VersionIncrement</id>
-    <version>1.2.6</version>
-    <title>Version Increment</title>
+    <id>KTools.Version1up</id>
+    <version>2.0.10</version>
+    <title>Version 1up for .NET Framework</title>
     <authors>Keiho Sakapon</authors>
     <owners>Keiho Sakapon</owners>
     <licenseUrl>https://github.com/sakapon/Build-Release/blob/master/LICENSE</licenseUrl>
     <projectUrl>https://github.com/sakapon/Build-Release</projectUrl>
     <requireLicenseAcceptance>false</requireLicenseAcceptance>
-    <description>The PowerShell script to increment the assembly version on AssemblyInfo.</description>
-    <releaseNotes>Write log to the console.</releaseNotes>
+    <description>The PowerShell script to increment the assembly version in AssemblyInfo.</description>
+    <releaseNotes>Support the AssemblyInformationalVersion attribute.</releaseNotes>
     <copyright>© 2018 Keiho Sakapon</copyright>
     <tags>Build Release Version Increment Assembly AssemblyInfo PowerShell</tags>
   </metadata>
   <files>
-    <file src="KTools.VersionIncrement.ps1" target="content" />
+    <file src="KTools.Version1up.ps1" target="content" />
   </files>
 </package>

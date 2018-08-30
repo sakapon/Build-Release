@@ -1,0 +1,5 @@
+﻿$source = @"
+{0}"@
+
+Add-Type -TypeDefinition $source -Language CSharp
+exit [Program]::Main($Args)

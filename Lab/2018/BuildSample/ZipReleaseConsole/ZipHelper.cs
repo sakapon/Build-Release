@@ -46,6 +46,11 @@ public static class ZipHelper
     {
         var projFilePath = GetProjFilePath(projDirPath);
         var assemblyInfoFilePath = GetAssemblyInfoFilePath(projDirPath);
+        if (assemblyInfoFilePath == null)
+        {
+            Console.WriteLine("AssemblyInfo.cs is not found.");
+            return;
+        }
 
         var projXml = new XmlDocument();
         projXml.Load(projFilePath);
@@ -73,7 +78,7 @@ public static class ZipHelper
 
     static string GetAssemblyInfoFilePath(string dirPath)
     {
-        return Directory.EnumerateFiles(dirPath, "AssemblyInfo.cs", SearchOption.AllDirectories).Single();
+        return Directory.EnumerateFiles(dirPath, "AssemblyInfo.cs", SearchOption.AllDirectories).SingleOrDefault();
     }
 
     // (?<!) Zero-width negative lookbehind assertion.
