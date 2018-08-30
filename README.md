@@ -4,17 +4,17 @@ A set of tools to build a .NET project.
 [![license](https://img.shields.io/github/license/sakapon/Build-Release.svg)](https://github.com/sakapon/Build-Release/blob/master/LICENSE)
 
 The following tools are contained:
-- [Version 1up](#version-1up)
+- [**Version 1up**](#version-1up)
   - For the .NET Framework project format and the .NET Core project format
-- [Zip Release](#zip-release)
+- [**Zip Release**](#zip-release)
   - For the .NET Framework project format and the .NET Core project format
-- [NuGet Packup](#nuget-packup)
+- [**NuGet Packup**](#nuget-packup)
   - For the .NET Core project format
 
 There are options to use the tools:
-- Add the PowerShell script files to a .NET project by NuGet
 - Download [the PowerShell script files](https://github.com/sakapon/Build-Release/tree/master/Downloads) and extract them to any folder
 - Add the PowerShell scripts above to `External Tools` in Visual Studio (recommended)
+- Add the PowerShell script files to a .NET project by NuGet
 
 See [Usage](#usage) for details.
 
@@ -23,7 +23,7 @@ The PowerShell script to increment the assembly version.
 
 [![NuGet](https://img.shields.io/nuget/v/KTools.Version1up.svg)](https://www.nuget.org/packages/KTools.Version1up/)
 [![NuGet](https://img.shields.io/nuget/dt/KTools.Version1up.svg)](https://www.nuget.org/packages/KTools.Version1up/)  
-[NuGet Gallery | KTools.Version1up](https://www.nuget.org/packages/KTools.Version1up/)
+[NuGet Gallery | KTools.Version1up](https://www.nuget.org/packages/KTools.Version1up/) (for the .NET Framework project format)
 
 ### Specification
 - Increment the build number of the assembly version (`z` of `x.y.z`)
@@ -35,7 +35,7 @@ The PowerShell script to build the project and create a ZIP file.
 
 [![NuGet](https://img.shields.io/nuget/v/KTools.ZipRelease.svg)](https://www.nuget.org/packages/KTools.ZipRelease/)
 [![NuGet](https://img.shields.io/nuget/dt/KTools.ZipRelease.svg)](https://www.nuget.org/packages/KTools.ZipRelease/)  
-[NuGet Gallery | KTools.ZipRelease](https://www.nuget.org/packages/KTools.ZipRelease/)
+[NuGet Gallery | KTools.ZipRelease](https://www.nuget.org/packages/KTools.ZipRelease/) (for the .NET Framework project format)
 
 ### Specification
 - Increment the assembly version (call the [**Version 1up**](#version-1up))
@@ -52,12 +52,12 @@ The PowerShell script to build the project and create a NuGet package.
 
 ## Usage
 There are options to use the tools:
-- Add the PowerShell script files to a .NET project by NuGet
-  - Execute the scripts on the project folder
 - Download the latest version of [the PowerShell script files](https://github.com/sakapon/Build-Release/tree/master/Downloads) and extract them to any folder
   - Execute the scripts on the project folder
 - Add the PowerShell scripts above to `External Tools` in Visual Studio (recommended)
   - Execute the menu on the project
+- Add the PowerShell script files to a .NET project by NuGet
+  - Execute the scripts on the project folder
 
 You can customize the PowerShell script to meet your needs.
 
