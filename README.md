@@ -22,8 +22,12 @@ See [Usage](#usage) for details.
 The PowerShell script to increment the assembly version.
 
 [![NuGet](https://img.shields.io/nuget/v/KTools.Version1up.svg)](https://www.nuget.org/packages/KTools.Version1up/)
-[![NuGet](https://img.shields.io/nuget/dt/KTools.Version1up.svg)](https://www.nuget.org/packages/KTools.Version1up/)  
+[![NuGet](https://img.shields.io/nuget/dt/KTools.Version1up.svg)](https://www.nuget.org/packages/KTools.Version1up/)
 [NuGet Gallery | KTools.Version1up](https://www.nuget.org/packages/KTools.Version1up/)
+
+[![NuGet](https://img.shields.io/nuget/v/KTools.Version1up.NetCore.svg)](https://www.nuget.org/packages/KTools.Version1up.NetCore/)
+[![NuGet](https://img.shields.io/nuget/dt/KTools.Version1up.NetCore.svg)](https://www.nuget.org/packages/KTools.Version1up.NetCore/)
+[NuGet Gallery | KTools.Version1up.NetCore](https://www.nuget.org/packages/KTools.Version1up.NetCore/)
 
 ### Specification
 - Increment the build number of the assembly version (`z` of `x.y.z`)
@@ -34,8 +38,12 @@ The PowerShell script to increment the assembly version.
 The PowerShell script to build the project and create a ZIP file.
 
 [![NuGet](https://img.shields.io/nuget/v/KTools.ZipRelease.svg)](https://www.nuget.org/packages/KTools.ZipRelease/)
-[![NuGet](https://img.shields.io/nuget/dt/KTools.ZipRelease.svg)](https://www.nuget.org/packages/KTools.ZipRelease/)  
+[![NuGet](https://img.shields.io/nuget/dt/KTools.ZipRelease.svg)](https://www.nuget.org/packages/KTools.ZipRelease/)
 [NuGet Gallery | KTools.ZipRelease](https://www.nuget.org/packages/KTools.ZipRelease/)
+
+[![NuGet](https://img.shields.io/nuget/v/KTools.ZipRelease.NetCore.svg)](https://www.nuget.org/packages/KTools.ZipRelease.NetCore/)
+[![NuGet](https://img.shields.io/nuget/dt/KTools.ZipRelease.NetCore.svg)](https://www.nuget.org/packages/KTools.ZipRelease.NetCore/)
+[NuGet Gallery | KTools.ZipRelease.NetCore](https://www.nuget.org/packages/KTools.ZipRelease.NetCore/)
 
 ### Specification
 - Increment the assembly version (call the [**Version 1up**](#version-1up))
@@ -44,6 +52,10 @@ The PowerShell script to build the project and create a ZIP file.
 
 ## NuGet Packup
 The PowerShell script to build the project and create a NuGet package.
+
+[![NuGet](https://img.shields.io/nuget/v/KTools.NuGetPackup.NetCore.svg)](https://www.nuget.org/packages/KTools.NuGetPackup.NetCore/)
+[![NuGet](https://img.shields.io/nuget/dt/KTools.NuGetPackup.NetCore.svg)](https://www.nuget.org/packages/KTools.NuGetPackup.NetCore/)
+[NuGet Gallery | KTools.NuGetPackup.NetCore](https://www.nuget.org/packages/KTools.NuGetPackup.NetCore/)
 
 ### Specification
 - Increment the assembly version (call the [**Version 1up**](#version-1up))
