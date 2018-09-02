@@ -85,6 +85,9 @@ Choose the menu `Tools > External Tools`, and add a new content with the followi
 - [.nuspec File Reference for NuGet](https://docs.microsoft.com/en-us/nuget/schema/nuspec)
 - [NuGet Package Version Reference](https://docs.microsoft.com/en-us/nuget/reference/package-versioning)
 - [Manage external tools](https://docs.microsoft.com/en-us/visualstudio/ide/managing-external-tools)
-- [.NET ビルド小技集 (4)](https://sakapon.wordpress.com/2015/10/23/dotnet-build-4/) (my blog)
-- [ビルドして ZIP にする PowerShell スクリプト](https://sakapon.wordpress.com/2018/02/06/zip-release/) (my blog)
-- [ビルド用のスクリプトを Visual Studio の外部ツールに登録する](https://sakapon.wordpress.com/2018/08/20/external-tools-build/) (my blog)
+
+### My Blog
+- [.NET ビルド小技集 (4)](https://sakapon.wordpress.com/2015/10/23/dotnet-build-4/)
+- [ビルドして ZIP にする PowerShell スクリプト](https://sakapon.wordpress.com/2018/02/06/zip-release/)
+- [ビルド用のスクリプトを Visual Studio の外部ツールに登録する](https://sakapon.wordpress.com/2018/08/20/external-tools-build/)
+- [.NET Core 向けビルド スクリプト](https://sakapon.wordpress.com/2018/09/01/build-release-netcore/)
