@@ -29,8 +29,8 @@ namespace UnitTest.InitialSetNS
                 "<PropertyGroup Condition=\" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' \"><DebugType>pdbonly</DebugType></PropertyGroup>",
                 "<PropertyGroup Condition=\" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' \"><DebugType>none</DebugType></PropertyGroup>");
             Test(
-                "<PropertyGroup Configuration == Release ><DebugType>pdbonly</DebugType></PropertyGroup><PropertyGroup Configuration == Release ><DebugType>full</DebugType></PropertyGroup>",
-                "<PropertyGroup Configuration == Release ><DebugType>none</DebugType></PropertyGroup><PropertyGroup Configuration == Release ><DebugType>none</DebugType></PropertyGroup>");
+                "<PropertyGroup Configuration == 'Release ><DebugType>pdbonly</DebugType></PropertyGroup><PropertyGroup Configuration == 'Release ><DebugType>full</DebugType></PropertyGroup>",
+                "<PropertyGroup Configuration == 'Release ><DebugType>none</DebugType></PropertyGroup><PropertyGroup Configuration == 'Release ><DebugType>none</DebugType></PropertyGroup>");
         }
 
         [TestMethod]
@@ -47,6 +47,9 @@ namespace UnitTest.InitialSetNS
             Test(
                 "\r\n  [assembly: AssemblyInformationalVersion(\"12.34.56.78\")]  \r\n",
                 "\r\n  [assembly: AssemblyInformationalVersion(\"12.34.56\")]  \r\n");
+            Test(
+                "[assembly: AssemblyInformationalVersion(\"1.2.3.4-alpha\")]",
+                "[assembly: AssemblyInformationalVersion(\"1.2.3\")]");
             Test(
                 "// [assembly: AssemblyFileVersion(\"1.0.0.0\")]",
                 "// [assembly: AssemblyFileVersion(\"1.0.0.0\")]");
