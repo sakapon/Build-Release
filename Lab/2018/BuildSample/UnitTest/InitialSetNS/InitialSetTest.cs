@@ -10,7 +10,7 @@ namespace UnitTest.InitialSetNS
         [TestMethod]
         public void Main_1()
         {
-            InitialSet.Main(new[] { @"..\..\" });
+            InitialSet.Main(new[] { @"..\..\..\" });
             Assert.Inconclusive("See the file.");
         }
 
@@ -31,6 +31,34 @@ namespace UnitTest.InitialSetNS
             Test(
                 "<PropertyGroup Configuration == Release ><DebugType>pdbonly</DebugType></PropertyGroup><PropertyGroup Configuration == Release ><DebugType>full</DebugType></PropertyGroup>",
                 "<PropertyGroup Configuration == Release ><DebugType>none</DebugType></PropertyGroup><PropertyGroup Configuration == Release ><DebugType>none</DebugType></PropertyGroup>");
+        }
+
+        [TestMethod]
+        public void RevisionPattern_1()
+        {
+            var Test = CreateAssertion<string, string>(s => InitialSet.RevisionPattern.Replace(s, m => ""));
+
+            Test(
+                "[assembly: AssemblyVersion(\"1.0.0.0\")]",
+                "[assembly: AssemblyVersion(\"1.0.0.0\")]");
+            Test(
+                "[assembly: AssemblyFileVersion(\"1.23.456.0\")]",
+                "[assembly: AssemblyFileVersion(\"1.23.456\")]");
+            Test(
+                "\r\n  [assembly: AssemblyInformationalVersion(\"12.34.56.78\")]  \r\n",
+                "\r\n  [assembly: AssemblyInformationalVersion(\"12.34.56\")]  \r\n");
+            Test(
+                "// [assembly: AssemblyFileVersion(\"1.0.0.0\")]",
+                "// [assembly: AssemblyFileVersion(\"1.0.0.0\")]");
+            Test(
+                " // [assembly: AssemblyFileVersion(\"1.0.0.0\")]",
+                " // [assembly: AssemblyFileVersion(\"1.0.0.0\")]");
+            Test(
+                "[assembly: AssemblyCompany(\"Xyz Company\")]",
+                "[assembly: AssemblyCompany(\"Xyz Company\")]");
+            Test(
+                "\r\nAssemblyFileVersion(\"1.0.0.0\")\r\nAssemblyInformationalVersion(\"1.0.0.0\")\r\n",
+                "\r\nAssemblyFileVersion(\"1.0.0\")\r\nAssemblyInformationalVersion(\"1.0.0\")\r\n");
         }
     }
 }
