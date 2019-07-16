@@ -63,5 +63,16 @@ namespace UnitTest.InitialSetNS
                 "\r\nAssemblyFileVersion(\"1.0.0.0\")\r\nAssemblyInformationalVersion(\"1.0.0.0\")\r\n",
                 "\r\nAssemblyFileVersion(\"1.0.0\")\r\nAssemblyInformationalVersion(\"1.0.0\")\r\n");
         }
+
+        [TestMethod]
+        public void GetLineFormat_1()
+        {
+            var Test = CreateAssertion<string, int, int, string>(InitialSet.GetLineFormat);
+
+            Test("0123456789", 3, 5, "012{0}89");
+            Test("abc\r\nijk\r\nxyz", 6, 1, "i{0}k");
+            Test("abc\r\nijk\r\nxyz", 6, 0, "i{0}jk");
+            Test("abc\r\nijk\r\nxyz", 5, 3, "{0}");
+        }
     }
 }

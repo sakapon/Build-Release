@@ -51,7 +51,7 @@ public static class InitialSet
 
     static readonly char[] Crlf = new[] { '\r', '\n' };
 
-    static string GetLineFormat(string content, int index, int length)
+    internal static string GetLineFormat(string content, int index, int length)
     {
         var i1 = content.LastIndexOfAny(Crlf, index) + 1;
         var s1 = content.Substring(i1, index - i1);
