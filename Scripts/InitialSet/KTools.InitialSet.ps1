@@ -31,19 +31,35 @@ public static class InitialSet
 
     static void UpdateFile(string filePath, Regex regex, MatchEvaluator evaluator)
     {
+        Console.WriteLine(filePath);
         var encoding = DetectEncoding(filePath);
         var content = File.ReadAllText(filePath, encoding);
-        var newContent = regex.Replace(content, evaluator);
+        var newContent = regex.Replace(content, m =>
+        {
+            var newValue = evaluator(m);
+            if (newValue != m.Value)
+            {
+                var line = GetLineFormat(content, m.Index, m.Length);
+                Console.WriteLine("<< " + line, m.Value);
+                Console.WriteLine(">> " + line, newValue);
+            }
+            return newValue;
+        });
 
-        if (newContent == content)
-        {
-            Console.WriteLine("Unchanged: {0}", filePath);
-        }
-        else
-        {
+        if (newContent != content)
             File.WriteAllText(filePath, newContent, encoding);
-            Console.WriteLine("Changed: {0}", filePath);
-        }
+    }
+
+    static readonly char[] Crlf = new[] { '\r', '\n' };
+
+    internal static string GetLineFormat(string content, int index, int length)
+    {
+        var i1 = content.LastIndexOfAny(Crlf, index) + 1;
+        var s1 = content.Substring(i1, index - i1);
+        var i2 = content.IndexOfAny(Crlf, index);
+        if (i2 == -1) i2 = content.Length;
+        var s2 = content.Substring(index + length, i2 - index - length);
+        return s1 + "{0}" + s2;
     }
 
     internal static readonly Encoding UTF8N = new UTF8Encoding();
