@@ -19,12 +19,13 @@ public static class ZipHelper
             .Where(p => !p.Contains("amd64"))
             .ToArray();
 
-        var current = msbuilds.FirstOrDefault(p => p.Contains(@"MSBuild\Current"));
-        if (current != null) return current;
-
         var msbuildVersionPattern = new Regex(@"(?<=MSBuild\\).+?(?=\\)");
         var msbuild = msbuilds
-            .OrderByDescending(p => double.Parse(msbuildVersionPattern.Match(p).Value))
+            .OrderByDescending(p =>
+            {
+                var v = msbuildVersionPattern.Match(p).Value;
+                return v.Equals("Current", StringComparison.InvariantCultureIgnoreCase) ? double.MaxValue : double.Parse(v);
+            })
             .FirstOrDefault();
 
         return msbuild ?? GetMSBuildPathFromNetFW();
