@@ -12,54 +12,83 @@ public static class InitialSet
         // args[0]: The target directory path (optional).
         var dirPath = args.Length > 0 ? args[0] : ".";
 
-        foreach (var filePath in Directory.EnumerateFiles(dirPath, "*.csproj", SearchOption.AllDirectories))
-            UpdateFile(filePath, DebugTypePattern, m => "none");
-
-        foreach (var filePath in Directory.EnumerateFiles(dirPath, "AssemblyInfo.cs", SearchOption.AllDirectories))
-            UpdateFile(filePath, RevisionPattern, m => "");
+        foreach (var filePath in GetProjFilePaths(dirPath))
+            UpdateFile(filePath);
 
         return 0;
+    }
+
+    static IEnumerable<string> GetProjFilePaths(string dirPath)
+    {
+        return Directory.EnumerateFiles(dirPath, "*.csproj", SearchOption.AllDirectories)
+            .Concat(Directory.EnumerateFiles(dirPath, "*.vbproj", SearchOption.AllDirectories))
+            .Concat(Directory.EnumerateFiles(dirPath, "*.fsproj", SearchOption.AllDirectories));
+    }
+
+    static void UpdateFile(string filePath)
+    {
+        Console.Write("{0}: ", filePath);
+        var encoding = DetectEncoding(filePath);
+        var content = File.ReadAllText(filePath, encoding);
+        var newContent = UpdateContent(content, Path.GetFileNameWithoutExtension(filePath));
+        if (newContent == content)
+        {
+            Console.WriteLine("Not Updated");
+        }
+        else
+        {
+            File.WriteAllText(filePath, newContent, encoding);
+            Console.WriteLine("Updated");
+        }
     }
 
     // (?<!) Zero-width negative lookbehind assertion.
     // (?<=) Zero-width positive lookbehind assertion.
     // (?!)  Zero-width negative lookahead assertion.
     // (?=)  Zero-width positive lookahead assertion.
-    internal static readonly Regex DebugTypePattern = new Regex(@"(?<=<PropertyGroup.+?Configuration.+?==.+?'Release.+?>.*?<DebugType>).+?(?=</DebugType>.*?</PropertyGroup>)", RegexOptions.Singleline);
-    internal static readonly Regex RevisionPattern = new Regex(@"(?<!^\s*//.*)(?<=Assembly((File)|(Informational))Version\(""\d+\.\d+\.\d+)\..+?(?=""\))", RegexOptions.Multiline);
+    internal static readonly Regex ReleaseGroupPattern = new Regex(@"(?<=<PropertyGroup.+?Configuration.+?==.+?'Release.+?>).+?(?=</PropertyGroup>)", RegexOptions.Singleline);
+    internal static readonly Regex AssemblyNamePattern = new Regex(@"(?<=<AssemblyName>).+?(?=</AssemblyName>)", RegexOptions.Multiline);
 
-    static void UpdateFile(string filePath, Regex regex, MatchEvaluator evaluator)
+    internal static string UpdateContent(string content, string projName)
     {
-        Console.WriteLine(filePath);
-        var encoding = DetectEncoding(filePath);
-        var content = File.ReadAllText(filePath, encoding);
-        var newContent = regex.Replace(content, m =>
+        if (!content.Contains("<Version>"))
         {
-            var newValue = evaluator(m);
-            if (newValue != m.Value)
-            {
-                var line = GetLineFormat(content, m.Index, m.Length);
-                Console.WriteLine("<< " + line, m.Value);
-                Console.WriteLine(">> " + line, newValue);
-            }
-            return newValue;
-        });
+            var match = Regex.Match(content, @"\s*</PropertyGroup>", RegexOptions.Singleline);
+            if (match.Success)
+                content = content.Insert(match.Index, "\r\n    <Version>1.0.0</Version>");
+        }
 
-        if (newContent != content)
-            File.WriteAllText(filePath, newContent, encoding);
+        if (!ReleaseGroupPattern.IsMatch(content))
+        {
+            var releaseGroup = content.Contains("<OutputType>") ? ReleaseGroupForExe : string.Format(ReleaseGroupForDllFormat, GetAssemblyName(content) ?? projName);
+            var match = Regex.Match(content, @"\s*</Project>", RegexOptions.Singleline);
+            if (match.Success)
+                content = content.Insert(match.Index, releaseGroup);
+        }
+
+        return content;
     }
 
-    static readonly char[] Crlf = new[] { '\r', '\n' };
-
-    internal static string GetLineFormat(string content, int index, int length)
+    static string GetAssemblyName(string content)
     {
-        var i1 = content.LastIndexOfAny(Crlf, index) + 1;
-        var s1 = content.Substring(i1, index - i1);
-        var i2 = content.IndexOfAny(Crlf, index);
-        if (i2 == -1) i2 = content.Length;
-        var s2 = content.Substring(index + length, i2 - index - length);
-        return s1 + "{0}" + s2;
+        var match = AssemblyNamePattern.Match(content);
+        return string.IsNullOrWhiteSpace(match.Value) ? null : match.Value;
     }
+
+    const string ReleaseGroupForExe = @"
+
+  <PropertyGroup Condition=""'$(Configuration)|$(Platform)'=='Release|AnyCPU'"">
+    <DebugType>none</DebugType>
+    <DebugSymbols>false</DebugSymbols>
+  </PropertyGroup>";
+
+    const string ReleaseGroupForDllFormat = @"
+
+  <PropertyGroup Condition=""'$(Configuration)|$(Platform)'=='Release|AnyCPU'"">
+    <DebugType>none</DebugType>
+    <DebugSymbols>false</DebugSymbols>
+    <DocumentationFile>bin\Release\{0}.xml</DocumentationFile>
+  </PropertyGroup>";
 
     internal static readonly Encoding UTF8N = new UTF8Encoding();
 

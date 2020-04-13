@@ -10,14 +10,14 @@ namespace UnitTest.InitialSetNS
         [TestMethod]
         public void Main_1()
         {
-            InitialSet.Main(new[] { @"..\..\..\" });
+            InitialSet.Main(new[] { @"..\..\..\..\" });
             Assert.Inconclusive("See the file.");
         }
 
         [TestMethod]
-        public void DebugTypePattern_1()
+        public void ReleaseGroupPattern_1()
         {
-            var Test = CreateAssertion<string, string>(s => InitialSet.DebugTypePattern.Replace(s, m => "none"));
+            var Test = CreateAssertion<string, string>(s => InitialSet.ReleaseGroupPattern.Replace(s, m => "none"));
 
             Test(
                 "  <PropertyGroup Condition=\" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' \">\r\n  <DebugType>pdbonly</DebugType>\r\n  </PropertyGroup>\r\n",
@@ -34,9 +34,9 @@ namespace UnitTest.InitialSetNS
         }
 
         [TestMethod]
-        public void RevisionPattern_1()
+        public void AssemblyNamePattern_1()
         {
-            var Test = CreateAssertion<string, string>(s => InitialSet.RevisionPattern.Replace(s, m => ""));
+            var Test = CreateAssertion<string, string>(s => InitialSet.AssemblyNamePattern.Replace(s, m => ""));
 
             Test(
                 "[assembly: AssemblyVersion(\"1.0.0.0\")]",
@@ -62,17 +62,6 @@ namespace UnitTest.InitialSetNS
             Test(
                 "\r\nAssemblyFileVersion(\"1.0.0.0\")\r\nAssemblyInformationalVersion(\"1.0.0.0\")\r\n",
                 "\r\nAssemblyFileVersion(\"1.0.0\")\r\nAssemblyInformationalVersion(\"1.0.0\")\r\n");
-        }
-
-        [TestMethod]
-        public void GetLineFormat_1()
-        {
-            var Test = CreateAssertion<string, int, int, string>(InitialSet.GetLineFormat);
-
-            Test("0123456789", 3, 5, "012{0}89");
-            Test("abc\r\nijk\r\nxyz", 6, 1, "i{0}k");
-            Test("abc\r\nijk\r\nxyz", 6, 0, "i{0}jk");
-            Test("abc\r\nijk\r\nxyz", 5, 3, "{0}");
         }
     }
 }
