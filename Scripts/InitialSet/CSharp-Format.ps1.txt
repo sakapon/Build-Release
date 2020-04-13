@@ -1,5 +1,5 @@
-﻿$source = @"
-{0}"@
+﻿$source = @'
+{0}'@
 
 Add-Type -TypeDefinition $source -Language CSharp
 exit [InitialSet]::Main($Args)

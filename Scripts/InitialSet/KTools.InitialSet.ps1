@@ -1,4 +1,4 @@
-﻿$source = @"
+﻿$source = @'
 using System;
 using System.Collections.Generic;
 using System.IO;
@@ -76,7 +76,7 @@ public static class InitialSet
         return headBytes.SequenceEqual(preamble) ? Encoding.UTF8 : UTF8N;
     }
 }
-"@
+'@
 
 Add-Type -TypeDefinition $source -Language CSharp
 exit [InitialSet]::Main($Args)
