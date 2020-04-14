@@ -46,7 +46,7 @@ public static class InitialSet
     // (?<=) Zero-width positive lookbehind assertion.
     // (?!)  Zero-width negative lookahead assertion.
     // (?=)  Zero-width positive lookahead assertion.
-    internal static readonly Regex ReleaseGroupPattern = new Regex(@"(?<=<PropertyGroup.+?Configuration.+?==.+?'Release.+?>).+?(?=</PropertyGroup>)", RegexOptions.Singleline);
+    internal static readonly Regex ReleaseGroupPattern = new Regex(@"(?<=<PropertyGroup.+?Configuration.+?==.*?'Release.+?>).+?(?=</PropertyGroup>)", RegexOptions.Singleline);
     internal static readonly Regex AssemblyNamePattern = new Regex(@"(?<=<AssemblyName>).+?(?=</AssemblyName>)", RegexOptions.Multiline);
 
     internal static string UpdateContent(string content, string projName)
