@@ -74,6 +74,9 @@ Choose the menu `Tools > External Tools`, and add a new content with the followi
 ![ExternalTools](docs/images/ExternalTools.png)
 
 ## Release Notes
+- **v2.1.14**
+  - Add [**Initial Set**](#initial-set).
+  - Update paths to MSBuild.exe for Visual Studio 2019.
 - **v2.0.10** For .NET Core.
 - **v1.2.6** Find the path to .ps1 files, regardless of the current directory.
 - **v1.2.5** Find the path to MSBuild.exe.
