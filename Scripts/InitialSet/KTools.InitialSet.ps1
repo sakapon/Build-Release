@@ -78,5 +78,10 @@ public static class InitialSet
 }
 '@
 
+
+"Initial Set for .NET Framework"
+
 Add-Type -TypeDefinition $source -Language CSharp
-exit [InitialSet]::Main($Args)
+[InitialSet]::Main($Args)
+
+"Initial Set: Completed"
