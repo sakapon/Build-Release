@@ -20,13 +20,13 @@ namespace UnitTest.InitialSetNS
             var Test = CreateAssertion<string, bool>(s => InitialSet.ReleaseGroupPattern.IsMatch(s));
 
             Test(
-                "  <PropertyGroup Condition=\" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' \">\r\n  <DebugType>pdbonly</DebugType>\r\n  </PropertyGroup>\r\n",
+                @"  <PropertyGroup Condition=""'$(Configuration)|$(Platform)'=='Release|AnyCPU'"">\r\n  <DebugType>pdbonly</DebugType>\r\n  </PropertyGroup>\r\n",
                 true);
             Test(
-                "  <PropertyGroup Condition=\" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' \">\r\n  <DebugType>full</DebugType>\r\n  </PropertyGroup>\r\n",
+                @"  <PropertyGroup Condition=""'$(Configuration)|$(Platform)'=='Debug|AnyCPU'"">\r\n  <DebugType>full</DebugType>\r\n  </PropertyGroup>\r\n",
                 false);
             Test(
-                "<PropertyGroup Configuration == 'Release > </PropertyGroup>",
+                "<PropertyGroup Configuration =='Release > </PropertyGroup>",
                 true);
             Test(
                 "<PropertyGroup Configuration == 'Release ><DebugType>pdbonly</DebugType></PropertyGroup><PropertyGroup Configuration == 'Release ><DebugType>full</DebugType></PropertyGroup>",
