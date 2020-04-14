@@ -51,5 +51,86 @@ namespace UnitTest.InitialSetNS
                 "\r\n<AssemblyName>App123</AssemblyName>\r\n<AssemblyName>App456</AssemblyName>\r\n",
                 "App123");
         }
+
+        [TestMethod]
+        public void UpdateContent_1()
+        {
+            var Test = CreateAssertion<string, string, string>(InitialSet.UpdateContent);
+
+            Test(
+                @"<Project>
+
+  <PropertyGroup>
+    <OutputType>Exe</OutputType>
+  </PropertyGroup>
+
+</Project>",
+                "App123",
+                @"<Project>
+
+  <PropertyGroup>
+    <OutputType>Exe</OutputType>
+    <Version>1.0.0</Version>
+  </PropertyGroup>
+
+  <PropertyGroup Condition=""'$(Configuration)|$(Platform)'=='Release|AnyCPU'"">
+    <DebugType>none</DebugType>
+    <DebugSymbols>false</DebugSymbols>
+  </PropertyGroup>
+
+</Project>");
+            Test(
+                @"<Project>
+  <PropertyGroup>
+  </PropertyGroup>
+</Project>",
+                "Lib123",
+                @"<Project>
+  <PropertyGroup>
+    <Version>1.0.0</Version>
+  </PropertyGroup>
+
+  <PropertyGroup Condition=""'$(Configuration)|$(Platform)'=='Release|AnyCPU'"">
+    <DebugType>none</DebugType>
+    <DebugSymbols>false</DebugSymbols>
+    <DocumentationFile>bin\Release\Lib123.xml</DocumentationFile>
+  </PropertyGroup>
+</Project>");
+            Test(
+                @"<Project>
+  <PropertyGroup>
+    <AssemblyName>Lib456</AssemblyName>
+  </PropertyGroup>
+</Project>",
+                "Lib123",
+                @"<Project>
+  <PropertyGroup>
+    <AssemblyName>Lib456</AssemblyName>
+    <Version>1.0.0</Version>
+  </PropertyGroup>
+
+  <PropertyGroup Condition=""'$(Configuration)|$(Platform)'=='Release|AnyCPU'"">
+    <DebugType>none</DebugType>
+    <DebugSymbols>false</DebugSymbols>
+    <DocumentationFile>bin\Release\Lib456.xml</DocumentationFile>
+  </PropertyGroup>
+</Project>");
+            Test(
+                @"<Project>
+  <PropertyGroup>
+    <Version>1.2.3</Version>
+  </PropertyGroup>
+  <PropertyGroup Condition=""'$(Configuration)|$(Platform)'=='Release|AnyCPU'"">
+  </PropertyGroup>
+</Project>",
+                "Lib123",
+                @"<Project>
+  <PropertyGroup>
+    <Version>1.2.3</Version>
+  </PropertyGroup>
+  <PropertyGroup Condition=""'$(Configuration)|$(Platform)'=='Release|AnyCPU'"">
+  </PropertyGroup>
+</Project>");
+        }
     }
 }
