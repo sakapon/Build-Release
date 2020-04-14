@@ -38,4 +38,4 @@ $filePaths = @(
     "Version1up.NetCore\KTools.Version1up.NetCore.ps1",
     "ZipRelease.NetCore\KTools.ZipRelease.NetCore.ps1",
     "NuGetPackup.NetCore\KTools.NuGetPackup.NetCore.ps1")
-[ZipHelper]::CreateZipFile("..\Downloads", "BuildRelease-.zip", $filePaths)
+[ZipHelper]::CreateZipFile("..\Downloads", "BuildRelease-2.1.13.zip", $filePaths)
