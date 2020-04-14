@@ -25,7 +25,7 @@ public static class InitialSet
     // (?<=) Zero-width positive lookbehind assertion.
     // (?!)  Zero-width negative lookahead assertion.
     // (?=)  Zero-width positive lookahead assertion.
-    internal static readonly Regex DebugTypePattern = new Regex(@"(?<=<PropertyGroup.+?Configuration.+?==.+?'Release.+?>.*?<DebugType>).+?(?=</DebugType>.*?</PropertyGroup>)", RegexOptions.Singleline);
+    internal static readonly Regex DebugTypePattern = new Regex(@"(?<=<PropertyGroup.+?Configuration.+?==.*?'Release.+?>.*?<DebugType>).+?(?=</DebugType>.*?</PropertyGroup>)", RegexOptions.Singleline);
     internal static readonly Regex RevisionPattern = new Regex(@"(?<!^\s*//.*)(?<=Assembly((File)|(Informational))Version\(""\d+\.\d+\.\d+)\..+?(?=""\))", RegexOptions.Multiline);
 
     static void UpdateFile(string filePath, Regex regex, MatchEvaluator evaluator)
