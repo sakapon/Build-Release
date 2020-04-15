@@ -12,14 +12,19 @@ public static class ZipHelper
     public static string GetMSBuildPath()
     {
         var programFiles = Environment.GetFolderPath(Environment.SpecialFolder.ProgramFilesX86);
-        var msvs = Path.Combine(programFiles, "Microsoft Visual Studio");
-        var msb = Path.Combine(programFiles, "MSBuild");
-        var msbuilds = GetMSBuildPaths(msvs).Concat(GetMSBuildPaths(msb)).ToArray();
+        var msbuilds = new[] { "Microsoft Visual Studio", "MSBuild" }
+            .Select(x => Path.Combine(programFiles, x))
+            .SelectMany(GetMSBuildPaths)
+            .Where(p => !p.Contains("amd64"))
+            .ToArray();
 
         var msbuildVersionPattern = new Regex(@"(?<=MSBuild\\).+?(?=\\)");
         var msbuild = msbuilds
-            .Where(p => !p.Contains("amd64"))
-            .OrderByDescending(p => double.Parse(msbuildVersionPattern.Match(p).Value))
+            .OrderByDescending(p =>
+            {
+                var v = msbuildVersionPattern.Match(p).Value;
+                return v.Equals("Current", StringComparison.InvariantCultureIgnoreCase) ? double.MaxValue : double.Parse(v);
+            })
             .FirstOrDefault();
 
         return msbuild ?? GetMSBuildPathFromNetFW();

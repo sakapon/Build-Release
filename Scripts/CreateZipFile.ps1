@@ -31,9 +31,11 @@ public static class ZipHelper
 Add-Type -TypeDefinition $source -Language CSharp -ReferencedAssemblies $references
 
 $filePaths = @(
+    "InitialSet\KTools.InitialSet.ps1",
     "Version1up\KTools.Version1up.ps1",
     "ZipRelease\KTools.ZipRelease.ps1",
+    "InitialSet.NetCore\KTools.InitialSet.NetCore.ps1",
     "Version1up.NetCore\KTools.Version1up.NetCore.ps1",
     "ZipRelease.NetCore\KTools.ZipRelease.NetCore.ps1",
     "NuGetPackup.NetCore\KTools.NuGetPackup.NetCore.ps1")
-[ZipHelper]::CreateZipFile("..\Downloads", "BuildRelease-.zip", $filePaths)
+[ZipHelper]::CreateZipFile("..\Downloads", "BuildRelease-2.1.14.zip", $filePaths)

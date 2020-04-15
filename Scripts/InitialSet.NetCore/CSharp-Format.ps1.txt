@@ -1,0 +1,10 @@
+﻿$source = @'
+{0}'@
+
+
+"Initial Set for .NET Core"
+
+Add-Type -TypeDefinition $source -Language CSharp
+[InitialSet]::Main($Args)
+
+"Initial Set: Completed"

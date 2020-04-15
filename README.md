@@ -1,12 +1,15 @@
 # Build Release
-A set of tools to build a .NET project.
+A set of tools to build .NET projects.
 
 [![license](https://img.shields.io/github/license/sakapon/Build-Release.svg)](https://github.com/sakapon/Build-Release/blob/master/LICENSE)
 
 The following tools are contained:
+- [**Initial Set**](#initial-set)
 - [**Version 1up**](#version-1up)
 - [**Zip Release**](#zip-release)
 - [**NuGet Packup**](#nuget-packup)
+
+See [Specification](docs/Specification.md) for details.
 
 There are options to use the tools:
 - Download [the PowerShell script files](https://github.com/sakapon/Build-Release/tree/master/Downloads) and extract them to any folder
@@ -15,42 +18,33 @@ There are options to use the tools:
 
 See [Usage](#usage) for details.
 
-## Version 1up
-The PowerShell script to increment the assembly version.
-- For the .NET Framework project format
-- For the .NET Core project format
+## Initial Set
+The PowerShell script to add initial settings to the project that will be released.
 
+![](docs/images/InitialSet-Change.png)
+
+## Version 1up
 [![NuGet](https://img.shields.io/nuget/v/KTools.Version1up.svg)](https://www.nuget.org/packages/KTools.Version1up/)
 [![NuGet](https://img.shields.io/nuget/dt/KTools.Version1up.svg)](https://www.nuget.org/packages/KTools.Version1up/)  
 [NuGet Gallery | KTools.Version1up](https://www.nuget.org/packages/KTools.Version1up/) (for the .NET Framework project format)
 
-### Specification
-- Increment the build number of the assembly version (`z` of `x.y.z`)
-  - AssemblyInfo.cs for .NET Framework
-  - Project files for .NET Core
+The PowerShell script to increment the assembly version.
+
+![](docs/images/Version1up-Change.png)
 
 ## Zip Release
-The PowerShell script to build the project and create a ZIP file.
-- For the .NET Framework project format
-- For the .NET Core project format
-
 [![NuGet](https://img.shields.io/nuget/v/KTools.ZipRelease.svg)](https://www.nuget.org/packages/KTools.ZipRelease/)
 [![NuGet](https://img.shields.io/nuget/dt/KTools.ZipRelease.svg)](https://www.nuget.org/packages/KTools.ZipRelease/)  
 [NuGet Gallery | KTools.ZipRelease](https://www.nuget.org/packages/KTools.ZipRelease/) (for the .NET Framework project format)
 
-### Specification
-- Increment the assembly version (call the [**Version 1up**](#version-1up))
-- Build a release by the MSBuild
-- Create a ZIP file from the build result
+The PowerShell script to build the project and create a ZIP file.
+
+![](docs/images/ZipRelease-Explorer.png)
 
 ## NuGet Packup
 The PowerShell script to build the project and create a NuGet package.
-- For the .NET Core project format
 
-### Specification
-- Increment the assembly version (call the [**Version 1up**](#version-1up))
-- Build a release by the MSBuild
-- Create a NuGet package from the build result
+![](docs/images/NuGetPackup-Explorer.png)
 
 ## Usage
 There are options to use the tools:
@@ -73,7 +67,14 @@ Choose the menu `Tools > External Tools`, and add a new content with the followi
 
 ![ExternalTools](docs/images/ExternalTools.png)
 
+## Testing Environment
+- Visual Studio 2017
+- Visual Studio 2019
+
 ## Release Notes
+- **v2.1.14**
+  - Add [**Initial Set**](#initial-set).
+  - Update paths to MSBuild.exe for Visual Studio 2019.
 - **v2.0.10** For .NET Core.
 - **v1.2.6** Find the path to .ps1 files, regardless of the current directory.
 - **v1.2.5** Find the path to MSBuild.exe.
@@ -86,7 +87,7 @@ Choose the menu `Tools > External Tools`, and add a new content with the followi
 - [NuGet Package Version Reference](https://docs.microsoft.com/en-us/nuget/reference/package-versioning)
 - [Manage external tools](https://docs.microsoft.com/en-us/visualstudio/ide/managing-external-tools)
 
-### My Blog
+### My Blog (in Japanese)
 - [.NET ビルド小技集 (4)](https://sakapon.wordpress.com/2015/10/23/dotnet-build-4/)
 - [ビルドして ZIP にする PowerShell スクリプト](https://sakapon.wordpress.com/2018/02/06/zip-release/)
 - [ビルド用のスクリプトを Visual Studio の外部ツールに登録する](https://sakapon.wordpress.com/2018/08/20/external-tools-build/)
