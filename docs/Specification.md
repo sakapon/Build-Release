@@ -1,20 +1,9 @@
-# Build Release
-A set of tools to build .NET projects.
-
-[![license](https://img.shields.io/github/license/sakapon/Build-Release.svg)](https://github.com/sakapon/Build-Release/blob/master/LICENSE)
-
+# Specification
 The following tools are contained:
 - [**Initial Set**](#initial-set)
 - [**Version 1up**](#version-1up)
 - [**Zip Release**](#zip-release)
 - [**NuGet Packup**](#nuget-packup)
-
-There are options to use the tools:
-- Download [the PowerShell script files](https://github.com/sakapon/Build-Release/tree/master/Downloads) and extract them to any folder
-- Add the PowerShell scripts above to `External Tools` in Visual Studio (**recommended**)
-- Install the PowerShell script files to a .NET project by NuGet
-
-See [Usage](#usage) for details.
 
 ## Initial Set
 The PowerShell script to add commonly used initial settings to the project.
