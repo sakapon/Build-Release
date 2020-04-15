@@ -17,52 +17,34 @@ There are options to use the tools:
 See [Usage](#usage) for details.
 
 ## Initial Set
-The PowerShell script to add commonly used initial settings to the project.
-
-### Specification
-- Add the setting for the assembly version
-- Set `Debug Information` (`DebugType`) to none
-- Add the setting for the XML Documentation file in case of DLL (.NET Core project format only)
+The PowerShell script to add initial settings to the project that will be released.
 
 ![](docs/images/InitialSet-Change.png)
 
 ## Version 1up
-The PowerShell script to increment the assembly version.
-
 [![NuGet](https://img.shields.io/nuget/v/KTools.Version1up.svg)](https://www.nuget.org/packages/KTools.Version1up/)
 [![NuGet](https://img.shields.io/nuget/dt/KTools.Version1up.svg)](https://www.nuget.org/packages/KTools.Version1up/)  
 [NuGet Gallery | KTools.Version1up](https://www.nuget.org/packages/KTools.Version1up/) (for the .NET Framework project format)
 
-### Specification
-- Increment the build number of the assembly version (`z` of `x.y.z`)
-  - AssemblyInfo.cs for .NET Framework
-  - Project files for .NET Core
+The PowerShell script to increment the assembly version.
 
 ![](docs/images/Version1up-Change.png)
 
 ## Zip Release
-The PowerShell script to build the project and create a ZIP file.
-
 [![NuGet](https://img.shields.io/nuget/v/KTools.ZipRelease.svg)](https://www.nuget.org/packages/KTools.ZipRelease/)
 [![NuGet](https://img.shields.io/nuget/dt/KTools.ZipRelease.svg)](https://www.nuget.org/packages/KTools.ZipRelease/)  
 [NuGet Gallery | KTools.ZipRelease](https://www.nuget.org/packages/KTools.ZipRelease/) (for the .NET Framework project format)
 
-### Specification
-- Increment the assembly version (call the [**Version 1up**](#version-1up))
-- Build a release by the MSBuild
-- Create a ZIP file from the build result
+The PowerShell script to build the project and create a ZIP file.
 
 ![](docs/images/ZipRelease-Explorer.png)
 
 ## NuGet Packup
 The PowerShell script to build the project and create a NuGet package.
 
-### Specification
-- Increment the assembly version (call the [**Version 1up**](#version-1up))
-- Build a release by the MSBuild
-- Create a NuGet package from the build result
-
 ![](docs/images/NuGetPackup-Explorer.png)
+
+See [Specification](docs/Specification.md) for details.
 
 ## Usage
 There are options to use the tools:
@@ -84,6 +66,10 @@ Choose the menu `Tools > External Tools`, and add a new content with the followi
 - Use Output window: `On`
 
 ![ExternalTools](docs/images/ExternalTools.png)
+
+## Testing Environment
+- Visual Studio 2017
+- Visual Studio 2019
 
 ## Release Notes
 - **v2.1.14**
