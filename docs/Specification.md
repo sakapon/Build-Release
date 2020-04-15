@@ -13,10 +13,13 @@ The following tools are contained:
   - For the .NET Core project format
 
 ## Initial Set
-The PowerShell script to add commonly used initial settings to the project.
+The PowerShell script to add initial settings to the project that will be released.
 - Add the setting for the assembly version
+  - AssemblyInfo.cs for .NET Framework
+  - Project files for .NET Core
 - Set `Debug Information` (`DebugType`) to none
-- Add the setting for the XML Documentation file in case of DLL (.NET Core project format only)
+- Add the setting for the XML Documentation file in case of DLL
+  - .NET Core only
 
 ![](images/InitialSet-Change.png)
 
