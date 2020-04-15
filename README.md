@@ -9,6 +9,8 @@ The following tools are contained:
 - [**Zip Release**](#zip-release)
 - [**NuGet Packup**](#nuget-packup)
 
+See [Specification](docs/Specification.md) for details.
+
 There are options to use the tools:
 - Download [the PowerShell script files](https://github.com/sakapon/Build-Release/tree/master/Downloads) and extract them to any folder
 - Add the PowerShell scripts above to `External Tools` in Visual Studio (**recommended**)
@@ -43,8 +45,6 @@ The PowerShell script to build the project and create a ZIP file.
 The PowerShell script to build the project and create a NuGet package.
 
 ![](docs/images/NuGetPackup-Explorer.png)
-
-See [Specification](docs/Specification.md) for details.
 
 ## Usage
 There are options to use the tools:
