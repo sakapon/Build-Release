@@ -1,9 +1,10 @@
 # Build Release
-A set of tools to build a .NET project.
+A set of tools to build .NET projects.
 
 [![license](https://img.shields.io/github/license/sakapon/Build-Release.svg)](https://github.com/sakapon/Build-Release/blob/master/LICENSE)
 
 The following tools are contained:
+- [**Initial Set**](#initial-set)
 - [**Version 1up**](#version-1up)
 - [**Zip Release**](#zip-release)
 - [**NuGet Packup**](#nuget-packup)
@@ -14,6 +15,16 @@ There are options to use the tools:
 - Install the PowerShell script files to a .NET project by NuGet
 
 See [Usage](#usage) for details.
+
+## Initial Set
+The PowerShell script to add commonly used initial settings to the project.
+- For the .NET Framework project format
+- For the .NET Core project format
+
+### Specification
+- Add the setting for the assembly version
+- Set `Debug Information` (`DebugType`) to none
+- Add the setting for the XML Documentation file in case of DLL (.NET Core project format only)
 
 ## Version 1up
 The PowerShell script to increment the assembly version.
@@ -89,7 +100,7 @@ Choose the menu `Tools > External Tools`, and add a new content with the followi
 - [NuGet Package Version Reference](https://docs.microsoft.com/en-us/nuget/reference/package-versioning)
 - [Manage external tools](https://docs.microsoft.com/en-us/visualstudio/ide/managing-external-tools)
 
-### My Blog
+### My Blog (in Japanese)
 - [.NET ビルド小技集 (4)](https://sakapon.wordpress.com/2015/10/23/dotnet-build-4/)
 - [ビルドして ZIP にする PowerShell スクリプト](https://sakapon.wordpress.com/2018/02/06/zip-release/)
 - [ビルド用のスクリプトを Visual Studio の外部ツールに登録する](https://sakapon.wordpress.com/2018/08/20/external-tools-build/)
